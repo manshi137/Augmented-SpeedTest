@@ -3,8 +3,8 @@ import subprocess
 import re
 import socket
 
-
-hops = 30
+port = 33434
+maxhops = 30
 def getip(ht):
     try:
         ip = socket.gethostbyname(ht)
@@ -14,14 +14,14 @@ def getip(ht):
 
 destination = input("Enter hostname: ")
 if(destination[0]=='w'):
-        ipo=getip(destination)
+        target_ip=getip(destination)
 else:
-        ipo=destination
+        target_ip=destination
 
 timetolive= 1
-while timetolive != hops + 1:
+while timetolive <maxhops:
     ttl = timetolive
-    nping_command = f"nping -c 1 --udp -p 33434 --ttl {ttl} {destination}"
+    nping_command = f"sudo nping --icmp -c 1 --ttl {ttl} {destination}"
     try:
         nping_output = subprocess.check_output(nping_command, shell=True, text=True)
         _ip = re.findall(r'\d+\.\d+\.\d+\.\d+', nping_output)
@@ -30,7 +30,7 @@ while timetolive != hops + 1:
             hop_ip = _ip[2]
             rtt = float(_rtt[0][9:])
             print(f"Hop {ttl}: ip = {hop_ip}, rtt = {rtt:.2f} ms")
-            if hop_ip == ipo:
+            if hop_ip == target_ip:
                 break
         else:
             print(f"Hop {ttl}: *")
