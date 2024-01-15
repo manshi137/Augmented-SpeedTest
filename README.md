@@ -22,4 +22,9 @@
     Check if congestion is at last mile.
   ## Step 5 - Week 7
     Buffer time + Mid Term Presentation
+
+## For running NDT7 client:
+    Run these commands inside ndt7-client-go repo
+    cd ./cmd/ndt7-client
+    go run main.go
   
