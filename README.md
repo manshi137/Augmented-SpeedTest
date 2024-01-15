@@ -24,7 +24,7 @@
     Buffer time + Mid Term Presentation
 
 ## For running NDT7 client:
-    Run these commands inside ndt7-client-go repo
+  #### Run these commands inside ndt7-client-go repo
     cd ./cmd/ndt7-client
     go run main.go
   
