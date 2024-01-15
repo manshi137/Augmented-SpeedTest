@@ -1,14 +1,13 @@
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
-import time
 
 # Commands to run in two different terminals
 command1 = "python ping.py"
-# command2 = "go run cmd/ndt-client/main.go -server=ndt.iupui.mlab1.nuq0t.measurement-lab.org:3001"
-command2 = "go run cmd/ndt-client/main.go"
+command2 = "go run ./cmd/ndt7-client/main.go"
 
 # Function to run a command in a new terminal
 def run_in_terminal(command):
+    subprocess.Popen(['start', 'cmd', '/k', command], shell=True)
     subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', command])
 
 # Run the commands simultaneously using ThreadPoolExecutor
