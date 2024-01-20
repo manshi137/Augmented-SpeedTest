@@ -3,7 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 # Commands to run in two different terminals
 command1 = "python ping.py"
-command2 = "go run ./cmd/ndt7-client/main.go"
+command2 = "ndt7-client"
 
 # Function to run a command in a new terminal
 def run_in_terminal(command):
