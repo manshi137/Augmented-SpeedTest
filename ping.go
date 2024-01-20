@@ -7,12 +7,14 @@ import (
 	"regexp"
 	"sync"
 	"time"
+	"io/ioutil"
+	"os"
 )
 
 const (
 	port    = 33434
 	maxHops = 10
-	numThreads = 1
+	numThreads = 3
 )
 func getIP(ht string) (string, error) {
 	ip, err := net.LookupIP(ht)
@@ -36,11 +38,17 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 	}
 	endTime := time.Now()
 	//print npingOutput
-	fmt.Printf("%s\n", npingOutput)
+	// fmt.Printf("%s\n", npingOutput)
 	fmt.Println("--------------------------------------------------")
 	duration := endTime.Sub(startTime)
 	fmt.Printf("Execution Time: %v\n", duration)
 	fmt.Println("--------------------------------------------------")
+
+	outputFileName := fmt.Sprintf("output%d.txt", ttl)
+	err = ioutil.WriteFile(outputFileName, npingOutput, 0644)//write npingOutput to file
+	if err != nil {
+		fmt.Printf("Error writing to %s: %v\n", outputFileName, err)
+	}
 
 	ipMatches := regexp.MustCompile(`\d+\.\d+\.\d+\.\d+`).FindAllString(string(npingOutput), -1)
 	rttMatches := regexp.MustCompile(`Avg rtt: [-+]?\d*\.\d+`).FindAllString(string(npingOutput), -1)
