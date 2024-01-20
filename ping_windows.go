@@ -43,7 +43,7 @@ func main() {
 		ttl := timeToLive
 		npingCommand := fmt.Sprintf("nping --icmp -c 1 --ttl %d %s", ttl, destination)
 
-		npingOutput, err := exec.Command("bash", "-c", npingCommand).Output()
+		npingOutput, err := exec.Command("cmd", "/C", npingCommand).Output()
 		
 		if err != nil {
 			fmt.Println("Error executing nping:", err)
