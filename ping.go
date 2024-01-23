@@ -102,11 +102,28 @@ func main() {
 
 	wg.Add(1)
 	go runNDT7Speedtest(&wg) // Run the ndt7-speedtest in a separate goroutine
+
+	// write a function that infer the ndt server; 
+	// Check this code: https://github.com/tarunmangla/speedtest-diagnostics/blob/master/tslp/tslp.go#L22
+	// findserver function
+
+
+	// start capturing the packets and store them in a file
+
+
 	for i := 1; i <= numThreads; i++ { // Run pingWithTTL concurrently in numThreads goroutines
-		wg.Add(1)
+		//wg.Add(1)
 		go pingWithTTL(i, targetIP, &wg)
 	}
 
+	// process 
 	// Wait for all goroutines to finish
 	wg.Wait()
+
+	// wait for 10 more seconds and then stop the pingWithTTL threads 
+
+	// process the pcap file: 1) find out the ping RTTs; 
+	// 2) find out the end time for download and the end time of the test;
+	// 3) run t-test on the ping data
+	
 }
