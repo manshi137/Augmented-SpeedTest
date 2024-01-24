@@ -7,16 +7,16 @@ import (
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/pcap"
     "github.com/google/gopacket/layers"
-	"github.com/manshi137/COD891/utils"
+	// "ndt7module"
 	"os/exec"
 	"regexp"
 	"sync"
 	"time"
 	"io/ioutil"
 	"os"
-	"./utils"
+	// "./utils"
 )
-
+// import "github.com/manshi137/COD891/utils"
 const (
 	port    = 33434
 	maxHops = 10
@@ -183,8 +183,8 @@ func main() {
 	fmt.Printf("Target IP: %s\n", targetIP)
 	var wg sync.WaitGroup
 
-	wg.Add(1)
-	go runNDT7Speedtest(&wg) // Run the ndt7-speedtest in a separate goroutine
+	// wg.Add(1)
+	// go runNDT7Speedtest(&wg) // Run the ndt7-speedtest in a separate goroutine
 
 	// write a function that infer the ndt server; 
 	// Check this code: https://github.com/tarunmangla/speedtest-diagnostics/blob/master/tslp/tslp.go#L22
