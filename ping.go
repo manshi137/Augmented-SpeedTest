@@ -25,12 +25,12 @@ const (
 
 
 func find_server(test_name string, filter_map map[string]string) string {
-	localIPv4 := utils.GetLocalIP("v4")
-	localIPv6 := utils.GetLocalIP("v6")
+	localIPv4 := GetLocalIP("v4")
+	localIPv6 := GetLocalIP("v6")
 	//packet capture params
 	var snaplen int32 = 96
 	num_pkts := 0
-	iface, err := utils.GetDefaultInterface()
+	iface, err := GetDefaultInterface()
 	fmt.Println("Interface is ", iface.Name)
 	if err != nil {
 	  fmt.Println("Failed to get default interface:", err)
@@ -60,7 +60,7 @@ func find_server(test_name string, filter_map map[string]string) string {
 	var serverIP string
 	for packet := range packetSource.Packets() {
   
-	  if utils.IsIPv6Packet(packet) {
+	  if IsIPv6Packet(packet) {
 		ipPacket, _ := packet.Layer(layers.LayerTypeIPv6).(*layers.IPv6)
 		sourceIP = ipPacket.SrcIP.String()
 		destIP = ipPacket.DstIP.String()
@@ -88,7 +88,7 @@ func find_server(test_name string, filter_map map[string]string) string {
 		break
 	  }
 	}
-	serverIPMax := utils.GetKeyWithMaxValue(ipCountMap)
+	serverIPMax := GetKeyWithMaxValue(ipCountMap)
 	return serverIPMax
 }
 
