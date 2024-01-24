@@ -3,12 +3,18 @@ package main
 import (
 	"fmt"
 	"net"
+	"log"
+	"github.com/google/gopacket"
+	"github.com/google/gopacket/pcap"
+    "github.com/google/gopacket/layers"
+	"github.com/manshi137/COD891/utils"
 	"os/exec"
 	"regexp"
 	"sync"
 	"time"
 	"io/ioutil"
 	"os"
+	"./utils"
 )
 
 const (
@@ -154,18 +160,18 @@ func runNDT7Speedtest(wg *sync.WaitGroup) {
 }
 
 func main() {
-  	destination := "www.google.com"
-	var targetIP string
-	if destination[0] == 'w' {
-		ip, err := getIP(destination)
-		if err != nil {
-			fmt.Println("Error:", err)
-			return
-		}
-		targetIP = ip
-	} else {
-		targetIP = destination
-	}
+  	// destination := "www.google.com"
+	// var targetIP string
+	// if destination[0] == 'w' {
+	// 	ip, err := getIP(destination)
+	// 	if err != nil {
+	// 		fmt.Println("Error:", err)
+	// 		return
+	// 	}
+	// 	targetIP = ip
+	// } else {
+	// 	targetIP = destination
+	// }
 	var filter_map = map[string]string {
 		"mlab": "port 443",
 		"ookla": "port 8080 or port 5060",

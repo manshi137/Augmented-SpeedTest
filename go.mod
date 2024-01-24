@@ -7,6 +7,7 @@ require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
+	github.com/google/gopacket v1.1.19 // indirect
 	github.com/gorilla/websocket v1.5.1 // indirect
 	github.com/m-lab/go v0.1.69 // indirect
 	github.com/m-lab/locate v0.14.43 // indirect
