@@ -241,8 +241,9 @@ func capturePacket(test_name string, filter_map map[string]string, time_sec int,
 		}
 		// fmt.Println(packet)
 		// write packet to file
-		packetData := packet.Data()
-		err = ioutil.WriteFile(outputFileName, packetData, 0644)//write npingOutput to file
+		packetData := fmt.Sprintf("%v", packet)
+		packetBytes := []byte(packetData)
+		err = ioutil.WriteFile(outputFileName, packetBytes, 0644)//write npingOutput to file
 		if err != nil {
 			fmt.Printf("Error writing to %s: %v\n", outputFileName, err)
 		}
