@@ -159,6 +159,7 @@ func runNDT7Speedtest(wg *sync.WaitGroup) {
 }
 
 func capturePacket(test_name string, filter_map map[string]string, time_sec int, wg *sync.WaitGroup) {
+	defer wg.Done()
 	// packet capture params
 	fmt.Println("Starting capturePacket function...")
 	var snaplen int32 = 1600

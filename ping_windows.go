@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"net"
+	// "net"
 	"log"
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/pcap"
@@ -122,9 +122,9 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 
 	// startTime := time.Now()
 	// npingCommand := fmt.Sprintf("sudo ping -c 20 -t %d -i 0.1 %s", ttl, targetIP)
-	npingCommand := fmt.Sprintf("sudo nping --tcp -c %d --ttl %d --delay %f %s", int(numPacket), ttl, delay, targetIP)
+	npingCommand := fmt.Sprintf("nping --tcp -c %d --ttl %d --delay %f %s", int(numPacket), ttl, delay, targetIP)
 	// npingCommand := fmt.Sprintf("sudo nping --tcp -c 20 --ttl %d --delay 0.1 %s", ttl, targetIP)
-	npingOutput, err := exec.Command("bash", "-c", npingCommand).Output()
+	npingOutput, err := exec.Command("cmd", "/C", npingCommand).Output()
 	if err != nil {
 		fmt.Println("Error executing nping:", err)
 		return
@@ -179,6 +179,7 @@ func runNDT7Speedtest(wg *sync.WaitGroup) {
 }
 
 func capturePacket(test_name string, filter_map map[string]string, time_sec int, wg *sync.WaitGroup) {
+	defer wg.Done()
 	// packet capture params
 	fmt.Println("Starting capturepackets...")
 	var snaplen int32 = 1600
@@ -190,8 +191,28 @@ func capturePacket(test_name string, filter_map map[string]string, time_sec int,
 	}
 	
 	capture_filter := filter_map[test_name]
+
 	fmt.Println("Capture filter is ", capture_filter)
-	handle, err := pcap.OpenLive(iface.Name, snaplen, false, pcap.BlockForever)
+	desiredFriendlyName := "Intel(R) Wi-Fi 6E AX211 160MHz"
+
+	// Find the corresponding device name for the given friendly name
+	interfaces, err := pcap.FindAllDevs()
+	if err != nil {
+		log.Fatal(err)
+	}
+	var desiredDeviceName string
+	for _, dev := range interfaces {
+		if dev.Description == desiredFriendlyName {
+			desiredDeviceName = dev.Name
+			break
+		}
+	}
+
+	// Check if the desired device name was found
+	if desiredDeviceName == "" {
+		log.Fatal("Desired network interface not found")
+	}
+	handle, err := pcap.OpenLive(desiredDeviceName, snaplen, false, pcap.BlockForever)
 	if err != nil {
 	  log.Fatal(err)
 	}
@@ -236,9 +257,9 @@ func main() {
 	}
 	
 	//print target IP
-	// var wg1 sync.WaitGroup
-	// wg1.Add(1)
-	// go runNDT7Speedtest(&wg1) // Run the ndt7-speedtest in a separate goroutine
+	var wg1 sync.WaitGroup
+	wg1.Add(1)
+	go runNDT7Speedtest(&wg1) // Run the ndt7-speedtest in a separate goroutine
 	var test_name = "mlab"
 	targetIP := find_server(test_name, filter_map)
 	fmt.Printf("Target IP: %s\n", targetIP)
@@ -261,7 +282,7 @@ func main() {
 		go pingWithTTL(i, targetIP, &wg2)
 	}
 
-	// wg1.Wait()
+	wg1.Wait()
 	fmt.Println("Done ndt7test....")
 	// wait for 10 more seconds and then stop the pingWithTTL threads
 	fmt.Println("Wait for 10 seconds...") 
