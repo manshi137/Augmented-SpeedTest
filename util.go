@@ -3,6 +3,7 @@ package main
 import (
   "fmt"
   "net"
+
   "github.com/google/gopacket"
   "github.com/google/gopacket/layers"
   //"sync"
@@ -10,6 +11,11 @@ import (
   "time"
   "github.com/google/gopacket/pcapgo"
   "github.com/google/gopacket/pcap"
+  "runtime"
+  "strings"
+  
+
+	// "github.com/djherbis/times"
 )
 
 
@@ -33,30 +39,75 @@ func GetLocalIP(ver string) string {
 }
 
 
-func GetDefaultInterface() (net.Interface, error) {
-// Get all network interfaces
-  interfaces, err := net.Interfaces()
-  if err != nil {
-    return net.Interface{}, err
-  }
-  // Find the default network interface
-  for _, iface := range interfaces {
-    if iface.Flags&net.FlagUp != 0 && iface.Flags&net.FlagLoopback == 0 {
-      addrs, err := iface.Addrs()
-      if err != nil {
-        return net.Interface{}, err
-      }
 
-      for _, addr := range addrs {
-        ipnet, ok := addr.(*net.IPNet)
-        if ok && !ipnet.IP.IsLoopback() && ipnet.IP.To4() != nil {
-          // Found the default network interface
-          return iface, nil
-        }
-      }
-    }
-  }
-  return net.Interface{}, fmt.Errorf("default network interface not found")
+
+
+
+// func GetDefaultInterface() (net.Interface, error) {
+// // Get all network interfaces
+//   interfaces, err := net.Interfaces()
+//   if err != nil {
+//     return net.Interface{}, err
+//   }
+//   // Find the default network interface
+//   for _, iface := range interfaces {
+//     if iface.Flags&net.FlagUp != 0 && iface.Flags&net.FlagLoopback == 0 {
+//       addrs, err := iface.Addrs()
+//       if err != nil {
+//         return net.Interface{}, err
+//       }
+
+//       for _, addr := range addrs {
+//         ipnet, ok := addr.(*net.IPNet)
+//         if ok && !ipnet.IP.IsLoopback() && ipnet.IP.To4() != nil {
+//           // Found the default network interface
+//           return iface, nil
+//         }
+//       }
+//     }
+//   }
+//   return net.Interface{}, fmt.Errorf("default network interface not found")
+// }
+
+func isWiFiInterface(iface net.Interface) bool {
+	// Check if the interface name contains "Wi-Fi" (case-insensitive)
+	return strings.Contains(strings.ToLower(iface.Name), "wi-fi")
+}
+
+func GetDefaultInterface() (net.Interface, error) {
+	// Get all network interfaces
+	interfaces, err := net.Interfaces()
+	if err != nil {
+		return net.Interface{}, err
+	}
+
+	// Find the default network interface based on the operating system
+	for _, iface := range interfaces {
+		if runtime.GOOS == "windows" {
+			// On Windows, check for a Wi-Fi interface based on the interface name
+			if isWiFiInterface(iface) {
+				return iface, nil
+			}
+		} else {
+			// On other operating systems, use the existing logic
+			if iface.Flags&net.FlagUp != 0 && iface.Flags&net.FlagLoopback == 0 {
+				addrs, err := iface.Addrs()
+				if err != nil {
+					return net.Interface{}, err
+				}
+
+				for _, addr := range addrs {
+					ipnet, ok := addr.(*net.IPNet)
+					if ok && !ipnet.IP.IsLoopback() && ipnet.IP.To4() != nil {
+						// Found the default network interface
+						return iface, nil
+					}
+				}
+			}
+		}
+	}
+
+	return net.Interface{}, fmt.Errorf("default network interface not found")
 }
 
 

@@ -31,6 +31,8 @@ func find_server(test_name string, filter_map map[string]string) string {
 	var snaplen int32 = 96
 	num_pkts := 0
 	iface, err := GetDefaultInterface()
+	fmt.Println(iface)
+
 	fmt.Println("Interface is ", iface.Name)
 	if err != nil {
 	  fmt.Println("Failed to get default interface:", err)
@@ -38,7 +40,28 @@ func find_server(test_name string, filter_map map[string]string) string {
 	}
   
 	capture_filter := filter_map[test_name]
-	handle, err := pcap.OpenLive(iface.Name, snaplen, false, pcap.BlockForever)
+	desiredFriendlyName := "Intel(R) Wi-Fi 6E AX211 160MHz"
+
+	// Find the corresponding device name for the given friendly name
+	interfaces, err := pcap.FindAllDevs()
+	if err != nil {
+		log.Fatal(err)
+	}
+	var desiredDeviceName string
+	for _, dev := range interfaces {
+		if dev.Description == desiredFriendlyName {
+			desiredDeviceName = dev.Name
+			break
+		}
+	}
+
+	// Check if the desired device name was found
+	if desiredDeviceName == "" {
+		log.Fatal("Desired network interface not found")
+	}
+
+	fmt.Println("Desired device name= ", desiredDeviceName)
+	handle, err := pcap.OpenLive(desiredDeviceName, snaplen, false, pcap.BlockForever)
 	if err != nil {
 	  log.Fatal(err)
 	}
@@ -183,8 +206,8 @@ func main() {
 	fmt.Printf("Target IP: %s\n", targetIP)
 	var wg sync.WaitGroup
 
-	// wg.Add(1)
-	// go runNDT7Speedtest(&wg) // Run the ndt7-speedtest in a separate goroutine
+	wg.Add(1)
+	go runNDT7Speedtest(&wg) // Run the ndt7-speedtest in a separate goroutine
 
 	// write a function that infer the ndt server; 
 	// Check this code: https://github.com/tarunmangla/speedtest-diagnostics/blob/master/tslp/tslp.go#L22
