@@ -18,8 +18,6 @@ import (
 )
 // import "github.com/manshi137/COD891/utils"
 const (
-	port    = 33434
-	maxHops = 10
 	numThreads = 3
 )
 
@@ -115,33 +113,29 @@ func find_server(test_name string, filter_map map[string]string) string {
 	return serverIPMax
 }
 
-func getIP(ht string) (string, error) {
-	ip, err := net.LookupIP(ht)
-	if err != nil || len(ip) == 0 {
-		return "", fmt.Errorf("unable to resolve IP address for %s", ht)
-	}
-	return ip[1].String(), nil
-}
-
 func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 	defer wg.Done()
+	numPacket := 20.0
+	delay := 0.1
+	timeout := numPacket * delay 
+	fmt.Printf("ping with TTL %d and timeout %f\n", ttl, timeout)
 
-	fmt.Printf("Ping with TTL %d to target IP: %s\n", ttl, targetIP)
-	startTime := time.Now()
+	// startTime := time.Now()
 	// npingCommand := fmt.Sprintf("sudo ping -c 20 -t %d -i 0.1 %s", ttl, targetIP)
-	npingCommand := fmt.Sprintf("nping --tcp -c 20 --ttl %d --delay 0.1 %s", ttl, targetIP)
-	npingOutput, err := exec.Command("cmd", "/C", npingCommand).Output()
+	npingCommand := fmt.Sprintf("sudo nping --tcp -c %d --ttl %d --delay %f %s", int(numPacket), ttl, delay, targetIP)
+	// npingCommand := fmt.Sprintf("sudo nping --tcp -c 20 --ttl %d --delay 0.1 %s", ttl, targetIP)
+	npingOutput, err := exec.Command("bash", "-c", npingCommand).Output()
 	if err != nil {
 		fmt.Println("Error executing nping:", err)
 		return
 	}
-	endTime := time.Now()
+	// endTime := time.Now()
 	//print npingOutput
 	// fmt.Printf("%s\n", npingOutput)
-	fmt.Println("--------------------------------------------------")
-	duration := endTime.Sub(startTime)
-	fmt.Printf("Execution Time: %v\n", duration)
-	fmt.Println("--------------------------------------------------")
+	// fmt.Println("--------------------------------------------------")
+	// duration := endTime.Sub(startTime)
+	// fmt.Printf("Execution Time of ping: %v\n", duration)
+	// fmt.Println("--------------------------------------------------")
 
 	outputFileName := fmt.Sprintf("output%d.txt", ttl)
 	err = ioutil.WriteFile(outputFileName, npingOutput, 0644)//write npingOutput to file
@@ -163,11 +157,12 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 	} else {
 		fmt.Printf("Hop %d: *\n", ttl)
 	}
+	fmt.Println("Done pingWithTTL....")
 }
 
 func runNDT7Speedtest(wg *sync.WaitGroup) {
 	defer wg.Done()
-
+	fmt.Println("Running ndt7-speedtest...")
 	// Replace "ndt7-speedtest" with the actual path or command you want to run
 	cmd := exec.Command("ndt7-client")
 
@@ -180,24 +175,76 @@ func runNDT7Speedtest(wg *sync.WaitGroup) {
 	if err != nil {
 		fmt.Println("Error running ndt7-speedtest:", err)
 	}
+	fmt.Println("Done running ndt7-speedtest.")
+}
+
+func capturePacket(test_name string, filter_map map[string]string, time_sec int, wg *sync.WaitGroup) {
+	// packet capture params
+	fmt.Println("Starting capturepackets...")
+	var snaplen int32 = 1600
+	iface, err := GetDefaultInterface()
+	fmt.Println("Interface is ", iface.Name)
+	if err != nil {
+	  fmt.Println("Failed to get default interface:", err)
+	  return
+	}
+	
+	capture_filter := filter_map[test_name]
+	fmt.Println("Capture filter is ", capture_filter)
+	handle, err := pcap.OpenLive(iface.Name, snaplen, false, pcap.BlockForever)
+	if err != nil {
+	  log.Fatal(err)
+	}
+	
+	defer handle.Close()
+  
+	// Set the capture filter
+	err = handle.SetBPFFilter(capture_filter) // only capture packets from/to "port 443"
+	if err != nil {
+		log.Fatal(err)
+	}
+	
+	outputFileName := fmt.Sprintf("pcap.txt")
+	time_duration := time.Duration(time_sec) * time.Second
+	// Start capturing packets
+	packetSource := gopacket.NewPacketSource(handle, handle.LinkType()) //packetSource.Packets() is a channel
+	// capture packets for time_duration
+	startTime := time.Now()
+	fmt.Println("Start capturing packets...")
+	for packet := range packetSource.Packets() {
+		// Process captured packet
+		endTime := time.Now()
+		duration := endTime.Sub(startTime)
+		if duration > time_duration {
+			break
+		}
+		// fmt.Println(packet)
+		// write packet to file
+		packetData := packet.Data()
+		err = ioutil.WriteFile(outputFileName, packetData, 0644)//write npingOutput to file
+		if err != nil {
+			fmt.Printf("Error writing to %s: %v\n", outputFileName, err)
+		}
+	}
+	fmt.Println("Done capturepackets.")
 }
 
 func main() {
-
 	var filter_map = map[string]string {
 		"mlab": "port 443",
 		"ookla": "port 8080 or port 5060",
-	  }
+	}
 	
+	//print target IP
+	// var wg1 sync.WaitGroup
+	// wg1.Add(1)
+	// go runNDT7Speedtest(&wg1) // Run the ndt7-speedtest in a separate goroutine
 	var test_name = "mlab"
 	targetIP := find_server(test_name, filter_map)
-	//print target IP
-	fmt.Printf("Target IP = ndt7 server: %s\n", targetIP)
-	var wg1 sync.WaitGroup
+	fmt.Printf("Target IP: %s\n", targetIP)
+
 	var wg2 sync.WaitGroup
 
-	wg1.Add(1)
-	go runNDT7Speedtest(&wg1) // Run the ndt7-speedtest in a separate goroutine
 
 	// write a function that infer the ndt server; 
 	// Check this code: https://github.com/tarunmangla/speedtest-diagnostics/blob/master/tslp/tslp.go#L22
@@ -205,6 +252,8 @@ func main() {
 
 
 	// start capturing the packets and store them in a file
+	wg2.Add(1)
+	go capturePacket(test_name, filter_map, 10, &wg2)
 
 
 	for i := 1; i <= numThreads; i++ { // Run pingWithTTL concurrently in numThreads goroutines
@@ -212,13 +261,17 @@ func main() {
 		go pingWithTTL(i, targetIP, &wg2)
 	}
 
-	// process 
-	// Wait for all goroutines to finish
-	wg1.Wait() // stop ndt7test
+	// wg1.Wait()
+	fmt.Println("Done ndt7test....")
+	// wait for 10 more seconds and then stop the pingWithTTL threads
+	fmt.Println("Wait for 10 seconds...") 
+	time.Sleep(10 * time.Second)
 
-	// wait for 10 more seconds and then stop the pingWithTTL threads 
+	wg2.Wait()
+	fmt.Println("Done pingWithTTL and capturePacket....")
 
-	// process the pcap file: 1) find out the ping RTTs; 
+	// process the pcap file: 
+	// 1) find out the ping RTTs; 
 	// 2) find out the end time for download and the end time of the test;
 	// 3) run t-test on the ping data
 	
