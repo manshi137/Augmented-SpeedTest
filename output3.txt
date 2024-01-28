@@ -1,63 +1,66 @@
 
-Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-01-29 00:28 India Standard Time
-SENT (0.2540s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-SENT (0.3580s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (0.3810s) ICMP [10.184.32.13 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=51623 iplen=56 ]
-RCVD (0.3810s) ICMP [10.119.233.65 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
-SENT (0.4580s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (0.4590s) ICMP [10.255.107.3 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
-RCVD (0.4590s) ICMP [10.255.107.3 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
-SENT (0.5590s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (0.5610s) ICMP [10.184.32.13 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=51623 iplen=56 ]
-RCVD (0.5610s) ICMP [10.119.233.65 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
-SENT (0.6610s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (0.6710s) ICMP [10.255.107.3 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
-RCVD (0.6710s) ICMP [10.184.32.13 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=51623 iplen=56 ]
-SENT (0.7710s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (0.7720s) ICMP [10.119.233.65 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
-RCVD (0.7720s) ICMP [10.255.107.3 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
-SENT (0.8720s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (0.8720s) ICMP [10.184.32.13 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=51623 iplen=56 ]
-RCVD (0.8720s) ICMP [10.119.233.65 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
-SENT (0.9720s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (0.9730s) ICMP [10.255.107.3 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
-RCVD (0.9730s) ICMP [10.184.32.13 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=51623 iplen=56 ]
-SENT (1.0730s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (1.0740s) ICMP [10.119.233.65 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
-RCVD (1.0740s) ICMP [10.255.107.3 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
-SENT (1.1740s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (1.1740s) ICMP [10.184.32.13 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=51623 iplen=56 ]
-RCVD (1.1740s) ICMP [10.119.233.65 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
-SENT (1.2740s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (1.2750s) ICMP [10.255.107.3 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
-RCVD (1.2750s) ICMP [10.184.32.13 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=51623 iplen=56 ]
-SENT (1.3750s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (1.3770s) ICMP [10.119.233.65 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
-RCVD (1.3770s) ICMP [10.255.107.3 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
-SENT (1.4770s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (1.4790s) ICMP [10.184.32.13 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=51623 iplen=56 ]
-RCVD (1.4790s) ICMP [10.119.233.65 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
-SENT (1.5790s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (1.5890s) ICMP [10.255.107.3 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
-RCVD (1.5890s) ICMP [10.184.32.13 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=51623 iplen=56 ]
-SENT (1.6890s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (1.6890s) ICMP [10.119.233.65 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
-RCVD (1.6890s) ICMP [10.255.107.3 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
-SENT (1.7890s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (1.7960s) ICMP [10.184.32.13 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=51623 iplen=56 ]
-RCVD (1.7960s) ICMP [10.119.233.65 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
-SENT (1.8960s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (1.9000s) ICMP [10.255.107.3 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
-RCVD (1.9000s) ICMP [10.119.233.65 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
-SENT (2.0000s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (2.0000s) ICMP [10.184.32.13 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=51623 iplen=56 ]
-RCVD (2.0000s) ICMP [10.255.107.3 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
-SENT (2.1000s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (2.1050s) ICMP [10.184.32.13 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=51623 iplen=56 ]
-RCVD (2.1050s) ICMP [10.119.233.65 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
-SENT (2.2050s) TCP 10.184.59.52:41158 > 61.246.223.37:80 S ttl=3 id=64894 iplen=40  seq=1026901818 win=1480 
-RCVD (2.2060s) ICMP [10.255.107.3 > 10.184.59.52 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-01-29 00:36 IST
+SENT (0.0177s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (0.0183s) ICMP [10.255.107.3 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.0204s) ICMP [10.184.32.13 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=64577 iplen=56 ]
+RCVD (0.0243s) ICMP [10.119.233.65 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+SENT (0.1179s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (0.1188s) ICMP [10.255.107.3 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.1238s) ICMP [10.184.32.13 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=64577 iplen=56 ]
+SENT (0.2192s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (0.2199s) ICMP [10.119.233.65 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+RCVD (0.2199s) ICMP [10.255.107.3 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+SENT (0.3197s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (0.3199s) ICMP [10.184.32.13 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=64577 iplen=56 ]
+RCVD (0.3199s) ICMP [10.119.233.65 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+SENT (0.4199s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (0.4204s) ICMP [10.255.107.3 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.4204s) ICMP [10.184.32.13 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=64577 iplen=56 ]
+SENT (0.5204s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (0.5206s) ICMP [10.119.233.65 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+RCVD (0.5206s) ICMP [10.255.107.3 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+SENT (0.6206s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (0.6209s) ICMP [10.184.32.13 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=64577 iplen=56 ]
+RCVD (0.6209s) ICMP [10.119.233.65 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+SENT (0.7211s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (0.7217s) ICMP [10.255.107.3 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.7217s) ICMP [10.184.32.13 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=64577 iplen=56 ]
+SENT (0.8228s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (0.8234s) ICMP [10.119.233.65 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+RCVD (0.8234s) ICMP [10.255.107.3 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+SENT (0.9235s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (0.9241s) ICMP [10.119.233.65 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+RCVD (0.9241s) ICMP [10.184.32.13 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=64577 iplen=56 ]
+SENT (1.0241s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (1.0248s) ICMP [10.255.107.3 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (1.0248s) ICMP [10.119.233.65 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+SENT (1.1248s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (1.1254s) ICMP [10.184.32.13 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=64577 iplen=56 ]
+RCVD (1.1254s) ICMP [10.255.107.3 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+SENT (1.2255s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (1.2267s) ICMP [10.119.233.65 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+RCVD (1.2267s) ICMP [10.184.32.13 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=64577 iplen=56 ]
+SENT (1.3267s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (1.3272s) ICMP [10.184.32.13 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=64577 iplen=56 ]
+RCVD (1.3272s) ICMP [10.255.107.3 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+SENT (1.4274s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (1.4280s) ICMP [10.119.233.65 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+RCVD (1.4280s) ICMP [10.255.107.3 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+SENT (1.5281s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (1.5286s) ICMP [10.119.233.65 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+RCVD (1.5286s) ICMP [10.184.32.13 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=64577 iplen=56 ]
+SENT (1.6288s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (1.6293s) ICMP [10.255.107.3 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (1.6293s) ICMP [10.119.233.65 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+SENT (1.7295s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (1.7300s) ICMP [10.184.32.13 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=64577 iplen=56 ]
+RCVD (1.7300s) ICMP [10.255.107.3 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+SENT (1.8312s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (1.8318s) ICMP [10.184.32.13 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=64577 iplen=56 ]
+RCVD (1.8318s) ICMP [10.119.233.65 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+SENT (1.9319s) TCP 10.184.60.99:24335 > 52.182.143.213:80 S ttl=3 id=30755 iplen=40  seq=934358936 win=1480 
+RCVD (1.9325s) ICMP [10.255.107.3 > 10.184.60.99 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
  
-Max rtt: 23.000ms | Min rtt: 0.000ms | Avg rtt: 1.342ms
-Raw packets sent: 20 (1.080KB) | Rcvd: 37 (2.072KB) | Lost: 0 (0.00%)
-Nping done: 1 IP address pinged in 2.21 seconds
+Max rtt: 6.470ms | Min rtt: 0.079ms | Avg rtt: 0.533ms
+Raw packets sent: 20 (800B) | Rcvd: 40 (2.240KB) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 1.93 seconds
