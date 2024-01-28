@@ -183,18 +183,7 @@ func runNDT7Speedtest(wg *sync.WaitGroup) {
 }
 
 func main() {
-  	// destination := "www.google.com"
-	// var targetIP string
-	// if destination[0] == 'w' {
-	// 	ip, err := getIP(destination)
-	// 	if err != nil {
-	// 		fmt.Println("Error:", err)
-	// 		return
-	// 	}
-	// 	targetIP = ip
-	// } else {
-	// 	targetIP = destination
-	// }
+
 	var filter_map = map[string]string {
 		"mlab": "port 443",
 		"ookla": "port 8080 or port 5060",
@@ -203,11 +192,12 @@ func main() {
 	var test_name = "mlab"
 	targetIP := find_server(test_name, filter_map)
 	//print target IP
-	fmt.Printf("Target IP: %s\n", targetIP)
-	var wg sync.WaitGroup
+	fmt.Printf("Target IP = ndt7 server: %s\n", targetIP)
+	var wg1 sync.WaitGroup
+	var wg2 sync.WaitGroup
 
-	wg.Add(1)
-	go runNDT7Speedtest(&wg) // Run the ndt7-speedtest in a separate goroutine
+	wg1.Add(1)
+	go runNDT7Speedtest(&wg1) // Run the ndt7-speedtest in a separate goroutine
 
 	// write a function that infer the ndt server; 
 	// Check this code: https://github.com/tarunmangla/speedtest-diagnostics/blob/master/tslp/tslp.go#L22
@@ -218,13 +208,13 @@ func main() {
 
 
 	for i := 1; i <= numThreads; i++ { // Run pingWithTTL concurrently in numThreads goroutines
-		//wg.Add(1)
-		go pingWithTTL(i, targetIP, &wg)
+		wg2.Add(1)
+		go pingWithTTL(i, targetIP, &wg2)
 	}
 
 	// process 
 	// Wait for all goroutines to finish
-	wg.Wait()
+	wg1.Wait() // stop ndt7test
 
 	// wait for 10 more seconds and then stop the pingWithTTL threads 
 
