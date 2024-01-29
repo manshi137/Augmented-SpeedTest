@@ -9,10 +9,10 @@ import (
     "github.com/google/gopacket/layers"
 	// "ndt7module"
 	"os/exec"
-	"regexp"
+	// "regexp"
 	"sync"
 	"time"
-	"io/ioutil"
+	// "io/ioutil"
 	"os"
 	// "./utils"
 )
@@ -20,9 +20,23 @@ import (
 const (
 	numThreads = 3
 )
+var stopPingFlag bool
+var stopPingMutex sync.Mutex
 
+func setStopPingFlag(value bool) {
+	stopPingMutex.Lock()
+	stopPingFlag = value
+	stopPingMutex.Unlock()
+}
 
-func find_server(test_name string, filter_map map[string]string) string {
+func getStopPingFlag() bool {
+	stopPingMutex.Lock()
+	defer stopPingMutex.Unlock()
+	return stopPingFlag
+}
+
+func find_server(test_name string, filter_map map[string]string, wg *sync.WaitGroup) string {
+	defer wg.Done()
 	localIPv4 := GetLocalIP("v4")
 	localIPv6 := GetLocalIP("v6")
 	//packet capture params
@@ -115,49 +129,47 @@ func find_server(test_name string, filter_map map[string]string) string {
 
 func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 	defer wg.Done()
-	numPacket := 20.0
-	delay := 0.1
-	timeout := numPacket * delay 
-	fmt.Printf("ping with TTL %d and timeout %f\n", ttl, timeout)
+	numPacket := 1
+	
+	fmt.Printf("ping with TTL %d, numPackat= %d \n", ttl, int(numPacket))
+	outputFileName := fmt.Sprintf("output%d.txt", ttl)
+	startTime := time.Now()
+	npingCommand := fmt.Sprintf("nping --tcp -c %d --ttl %d  %s", int(numPacket), ttl, targetIP)
 
-	// startTime := time.Now()
-	// npingCommand := fmt.Sprintf("sudo ping -c 20 -t %d -i 0.1 %s", ttl, targetIP)
-	npingCommand := fmt.Sprintf("nping --tcp -c %d --ttl %d --delay %f %s", int(numPacket), ttl, delay, targetIP)
-	// npingCommand := fmt.Sprintf("sudo nping --tcp -c 20 --ttl %d --delay 0.1 %s", ttl, targetIP)
-	npingOutput, err := exec.Command("cmd", "/C", npingCommand).Output()
+	interval := 100*time.Millisecond
+	ticker := time.NewTicker(interval)
+	defer ticker.Stop()
+	file, err := os.OpenFile(outputFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
-		fmt.Println("Error executing nping:", err)
+		fmt.Println("Error opening file:", err)
 		return
 	}
-	// endTime := time.Now()
-	//print npingOutput
-	// fmt.Printf("%s\n", npingOutput)
-	// fmt.Println("--------------------------------------------------")
-	// duration := endTime.Sub(startTime)
-	// fmt.Printf("Execution Time of ping: %v\n", duration)
-	// fmt.Println("--------------------------------------------------")
-
-	outputFileName := fmt.Sprintf("output%d.txt", ttl)
-	err = ioutil.WriteFile(outputFileName, npingOutput, 0644)//write npingOutput to file
-	if err != nil {
-		fmt.Printf("Error writing to %s: %v\n", outputFileName, err)
-	}
-
-	ipMatches := regexp.MustCompile(`\d+\.\d+\.\d+\.\d+`).FindAllString(string(npingOutput), -1)
-	rttMatches := regexp.MustCompile(`Avg rtt: [-+]?\d*\.\d+`).FindAllString(string(npingOutput), -1)
-	
-	if len(ipMatches) >= 3 && len(rttMatches) > 0 {
-		hopIP := ipMatches[2]
-		rtt := rttMatches[0][9:]
-		fmt.Printf("Hop %d: ip = %s, rtt = %s ms\n", ttl, hopIP, rtt)
-		if hopIP == targetIP {
-			fmt.Println("Target IP reached!")
-			return
+	defer file.Close()
+	for {
+		select {
+		case <-ticker.C:
+			if getStopPingFlag() {
+				fmt.Println("Stopping continuous ping due to StopFlag...")
+				return
+			}
+			npingOutput, err := exec.Command("cmd", "/C", npingCommand).Output()
+			if err != nil {
+				fmt.Println("Error executing nping:", err)
+				return
+			}
+			
+			if _, err := file.WriteString(string(npingOutput)); err != nil {
+				fmt.Println("Error appending to file:", err)
+			}
+			// fmt.Printf("Ping result for %s:\n%s\n", targetIP, string(npingOutput))
 		}
-	} else {
-		fmt.Printf("Hop %d: *\n", ttl)
 	}
-	fmt.Println("Done pingWithTTL....")
+	endTime := time.Now()
+	fmt.Println("--------------------------------------------------")
+	duration := endTime.Sub(startTime)
+	fmt.Printf("Execution Time of ping: %v\n", duration)
+	fmt.Println("--------------------------------------------------")
+	fmt.Println("Done pingWithTTL w/o StopFlag....")
 }
 
 func runNDT7Speedtest(wg *sync.WaitGroup) {
@@ -226,29 +238,35 @@ func capturePacket(test_name string, filter_map map[string]string, time_sec int,
 	}
 	
 	outputFileName := fmt.Sprintf("pcap.txt")
-	time_duration := time.Duration(time_sec) * time.Second
+	file, err := os.OpenFile(outputFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return
+	}
+	defer file.Close()
+	// time_duration := time.Duration(time_sec) * time.Second
 	// Start capturing packets
 	packetSource := gopacket.NewPacketSource(handle, handle.LinkType()) //packetSource.Packets() is a channel
 	// capture packets for time_duration
-	startTime := time.Now()
+	// startTime := time.Now()
 	fmt.Println("Start capturing packets...")
 	for packet := range packetSource.Packets() {
 		// Process captured packet
-		endTime := time.Now()
-		duration := endTime.Sub(startTime)
-		if duration > time_duration {
-			break
+		// endTime := time.Now()
+		// duration := endTime.Sub(startTime)
+		if getStopPingFlag() {
+			fmt.Println("Stopping capturePacket due to StopFlag...")
+			return
 		}
 		// fmt.Println(packet)
 		// write packet to file
 		packetData := fmt.Sprintf("%v", packet)
-		packetBytes := []byte(packetData)
-		err = ioutil.WriteFile(outputFileName, packetBytes, 0644)//write npingOutput to file
-		if err != nil {
-			fmt.Printf("Error writing to %s: %v\n", outputFileName, err)
+		// packetBytes := []byte(packetData)
+		if _, err := file.WriteString(packetData); err != nil {
+			fmt.Println("Error appending to file:", err)
 		}
 	}
-	fmt.Println("Done capturepackets.")
+	fmt.Println("Done capturepackets w/o StopFlag.")
 }
 
 func main() {
@@ -259,10 +277,12 @@ func main() {
 	
 	//print target IP
 	var wg1 sync.WaitGroup
+	var wg3 sync.WaitGroup
 	wg1.Add(1)
 	go runNDT7Speedtest(&wg1) // Run the ndt7-speedtest in a separate goroutine
 	var test_name = "mlab"
-	targetIP := find_server(test_name, filter_map)
+	wg3.Add(1)
+	targetIP := find_server(test_name, filter_map, &wg3)
 	fmt.Printf("Target IP: %s\n", targetIP)
 
 	var wg2 sync.WaitGroup
@@ -277,7 +297,7 @@ func main() {
 	wg2.Add(1)
 	go capturePacket(test_name, filter_map, 10, &wg2)
 
-
+	wg3.Wait()
 	for i := 1; i <= numThreads; i++ { // Run pingWithTTL concurrently in numThreads goroutines
 		wg2.Add(1)
 		go pingWithTTL(i, targetIP, &wg2)
@@ -288,6 +308,7 @@ func main() {
 	// wait for 10 more seconds and then stop the pingWithTTL threads
 	fmt.Println("Wait for 10 seconds...") 
 	time.Sleep(10 * time.Second)
+	setStopPingFlag(true)
 
 	wg2.Wait()
 	fmt.Println("Done pingWithTTL and capturePacket....")
