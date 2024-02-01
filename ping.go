@@ -7,6 +7,7 @@ import (
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/pcap"
     "github.com/google/gopacket/layers"
+	"github.com/google/gopacket/pcapgo"
 	// "ndt7module"
 	"os/exec"
 	"regexp"
@@ -184,29 +185,59 @@ func capturePacket(test_name string, filter_map map[string]string, time_sec int,
 	if err != nil {
 		log.Fatal(err)
 	}
-	
-	outputFileName := fmt.Sprintf("pcap.txt")
 	time_duration := time.Duration(time_sec) * time.Second
+	
+	// outputFileName := fmt.Sprintf("pcap.txt")
+	// // Start capturing packets
+	// packetSource := gopacket.NewPacketSource(handle, handle.LinkType()) //packetSource.Packets() is a channel
+	// // capture packets for time_duration
+	// startTime := time.Now()
+	// fmt.Println("Start capturing packets...")
+	// for packet := range packetSource.Packets() {
+	// 	endTime := time.Now()
+	// 	duration := endTime.Sub(startTime)
+	// 	if duration > time_duration {
+	// 		break
+	// 	}
+	// 	// fmt.Println(packet)
+	// 	// write packet to file
+	// 	packetData := packet.Data()
+	// 	err = ioutil.WriteFile(outputFileName, packetData, 0644)//write npingOutput to file
+	// 	if err != nil {
+	// 		fmt.Printf("Error writing to %s: %v\n", outputFileName, err)
+	// 	}
+	// }
+	// Create a new pcap file for writing
+	pcapFile, err := os.Create("pcap.pcap")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer pcapFile.Close()
+
+	// Create a new pcap writer
+	pcapWriter := pcapgo.NewWriter(pcapFile)
+	err = pcapWriter.WriteFileHeader(65536, layers.LinkTypeEthernet)
+	if err != nil {
+		log.Fatal(err) 
+	}
+
 	// Start capturing packets
-	packetSource := gopacket.NewPacketSource(handle, handle.LinkType()) //packetSource.Packets() is a channel
-	// capture packets for time_duration
 	startTime := time.Now()
 	fmt.Println("Start capturing packets...")
+	packetSource := gopacket.NewPacketSource(handle, handle.LinkType())
 	for packet := range packetSource.Packets() {
-		// Process captured packet
 		endTime := time.Now()
 		duration := endTime.Sub(startTime)
 		if duration > time_duration {
 			break
 		}
-		// fmt.Println(packet)
-		// write packet to file
-		packetData := packet.Data()
-		err = ioutil.WriteFile(outputFileName, packetData, 0644)//write npingOutput to file
+		// Write the packet to the pcap file
+		err := pcapWriter.WritePacket(packet.Metadata().CaptureInfo, packet.Data())
 		if err != nil {
-			fmt.Printf("Error writing to %s: %v\n", outputFileName, err)
+			log.Fatal(err)
 		}
 	}
+	fmt.Println("Packet capture complete")
 	fmt.Println("Done capturePacket function.")
 }
 
