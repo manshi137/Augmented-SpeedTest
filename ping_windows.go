@@ -135,7 +135,7 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 	fmt.Printf("ping with TTL %d, numPackat= %d \n", ttl, int(numPacket))
 	outputFileName := fmt.Sprintf("output%d.txt", ttl)
 	startTime := time.Now()
-	npingCommand := fmt.Sprintf("nping --tcp -c %d --ttl %d  %s", int(numPacket), ttl, targetIP)
+	npingCommand := fmt.Sprintf("nping --tcp -p 443 -c %d --ttl %d  %s", int(numPacket), ttl, targetIP)
 
 	interval := 100*time.Millisecond
 	ticker := time.NewTicker(interval)
