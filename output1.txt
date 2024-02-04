@@ -1,0 +1,527 @@
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.2020s) TCP 10.184.52.48:11384 > 34.131.204.19:443 S ttl=1 id=39855 iplen=40  seq=3616730182 win=1480 
+RCVD (0.2280s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.2280s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=39855 iplen=56 ]
+RCVD (0.2280s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 11.000ms | Min rtt: 11.000ms | Avg rtt: 11.000ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.23 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.2130s) TCP 10.184.52.48:28636 > 34.131.204.19:443 S ttl=1 id=18472 iplen=40  seq=3980602404 win=1480 
+RCVD (0.3000s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.3000s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=51240 iplen=56 ]
+RCVD (0.3000s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 44.000ms | Min rtt: 44.000ms | Avg rtt: 44.000ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.30 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.2110s) TCP 10.184.52.48:44742 > 34.131.204.19:443 S ttl=1 id=55742 iplen=40  seq=833798685 win=1480 
+RCVD (0.2740s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+RCVD (0.2810s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=55742 iplen=56 ]
+RCVD (0.2810s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+ 
+Max rtt: 61.000ms | Min rtt: 54.000ms | Avg rtt: 58.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.28 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.2370s) TCP 10.184.52.48:44762 > 34.131.204.19:443 S ttl=1 id=12597 iplen=40  seq=2312564452 win=1480 
+RCVD (0.2880s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=45365 iplen=56 ]
+RCVD (0.2880s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+RCVD (0.2890s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+ 
+Max rtt: 47.000ms | Min rtt: 46.000ms | Avg rtt: 46.333ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.29 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.2260s) TCP 10.184.52.48:20275 > 34.131.204.19:443 S ttl=1 id=61207 iplen=40  seq=3725526465 win=1480 
+RCVD (0.2500s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.2580s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=61207 iplen=56 ]
+RCVD (0.3410s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 91.000ms | Min rtt: 8.000ms | Avg rtt: 33.000ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.34 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1790s) TCP 10.184.52.48:20061 > 34.131.204.19:443 S ttl=1 id=60056 iplen=40  seq=833682399 win=1480 
+RCVD (0.2110s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.2110s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=60056 iplen=56 ]
+RCVD (0.4560s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 269.000ms | Min rtt: 24.000ms | Avg rtt: 105.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.46 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1870s) TCP 10.184.52.48:52392 > 34.131.204.19:443 S ttl=1 id=31063 iplen=40  seq=2491218018 win=1480 
+RCVD (0.2250s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.2250s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=63831 iplen=56 ]
+RCVD (0.4960s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+ 
+Max rtt: 305.000ms | Min rtt: 34.000ms | Avg rtt: 124.333ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.50 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1470s) TCP 10.184.52.48:35413 > 34.131.204.19:443 S ttl=1 id=55966 iplen=40  seq=576185981 win=1480 
+RCVD (0.1830s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=55966 iplen=56 ]
+RCVD (0.4630s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+RCVD (0.4630s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+ 
+Max rtt: 311.000ms | Min rtt: 31.000ms | Avg rtt: 217.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.46 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1600s) TCP 10.184.52.48:31524 > 34.131.204.19:443 S ttl=1 id=16764 iplen=40  seq=1245065042 win=1480 
+RCVD (0.1740s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=49532 iplen=56 ]
+RCVD (0.4480s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.4480s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 285.000ms | Min rtt: 11.000ms | Avg rtt: 193.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.45 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1670s) TCP 10.184.52.48:59661 > 34.131.204.19:443 S ttl=1 id=11194 iplen=40  seq=887109981 win=1480 
+RCVD (0.2080s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=43962 iplen=56 ]
+RCVD (0.4880s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.4890s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 319.000ms | Min rtt: 38.000ms | Avg rtt: 225.333ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.49 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+RCVD (0.1880s) TCP 10.184.52.48:14063 > 34.131.204.19:443 A ttl=128 id=15989 iplen=52  seq=2367988166 win=2051 <nop,nop,sack 1 {4132861387:2518120139}>
+SENT (0.1890s) TCP 10.184.52.48:2695 > 34.131.204.19:443 S ttl=1 id=25619 iplen=40  seq=3128443488 win=1480 
+RCVD (0.2130s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=58387 iplen=56 ]
+RCVD (0.4340s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 233.000ms | Min rtt: 12.000ms | Avg rtt: 122.500ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (164B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.43 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1740s) TCP 10.184.52.48:25226 > 34.131.204.19:443 S ttl=1 id=48458 iplen=40  seq=1303562380 win=1480 
+RCVD (0.1900s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=48458 iplen=56 ]
+RCVD (0.1930s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.4980s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 320.000ms | Min rtt: 12.000ms | Avg rtt: 115.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.50 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1900s) TCP 10.184.52.48:38050 > 34.131.204.19:443 S ttl=1 id=8678 iplen=40  seq=1667044158 win=1480 
+RCVD (0.2090s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.2260s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=41446 iplen=56 ]
+RCVD (0.4930s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 292.000ms | Min rtt: 8.000ms | Avg rtt: 108.333ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.49 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1850s) TCP 10.184.52.48:10455 > 34.131.204.19:443 S ttl=1 id=16412 iplen=40  seq=2002003455 win=1480 
+RCVD (0.2690s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=49180 iplen=56 ]
+RCVD (0.2690s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.5310s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 340.000ms | Min rtt: 78.000ms | Avg rtt: 165.333ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.53 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1870s) TCP 10.184.52.48:40323 > 34.131.204.19:443 S ttl=1 id=57707 iplen=40  seq=1544903219 win=1480 
+RCVD (0.2350s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.2350s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=57707 iplen=56 ]
+RCVD (0.4730s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 280.000ms | Min rtt: 42.000ms | Avg rtt: 121.333ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.47 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.2000s) TCP 10.184.52.48:16626 > 34.131.204.19:443 S ttl=1 id=32148 iplen=40  seq=229515756 win=1480 
+RCVD (0.2270s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=64916 iplen=56 ]
+RCVD (0.2270s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.4670s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 248.000ms | Min rtt: 8.000ms | Avg rtt: 88.000ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.47 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.2390s) TCP 10.184.52.48:29903 > 34.131.204.19:443 S ttl=1 id=59105 iplen=40  seq=2973843321 win=1480 
+ 
+Max rtt: N/A | Min rtt: N/A | Avg rtt: N/A
+Raw packets sent: 1 (54B) | Rcvd: 0 (0B) | Lost: 1 (100.00%)
+Nping done: 1 IP address pinged in 1.24 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1780s) TCP 10.184.52.48:25006 > 34.131.204.19:443 S ttl=1 id=17060 iplen=40  seq=411095395 win=1480 
+RCVD (0.2110s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=49828 iplen=56 ]
+RCVD (0.2110s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.4930s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 300.000ms | Min rtt: 18.000ms | Avg rtt: 112.000ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.49 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.2000s) TCP 10.184.52.48:21896 > 34.131.204.19:443 S ttl=1 id=53436 iplen=40  seq=1433062835 win=1480 
+RCVD (0.2050s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.2050s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=53436 iplen=56 ]
+RCVD (0.4200s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 215.000ms | Min rtt: 215.000ms | Avg rtt: 71.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.42 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1910s) TCP 10.184.52.48:19093 > 34.131.204.19:443 S ttl=1 id=4577 iplen=40  seq=2774336988 win=1480 
+RCVD (0.2030s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.2320s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=37345 iplen=56 ]
+RCVD (0.4910s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 288.000ms | Min rtt: 29.000ms | Avg rtt: 105.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.49 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.2170s) TCP 10.184.52.48:43167 > 34.131.204.19:443 S ttl=1 id=64667 iplen=40  seq=3522999291 win=1480 
+RCVD (0.2560s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=64667 iplen=56 ]
+RCVD (0.2560s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.5350s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 303.000ms | Min rtt: 24.000ms | Avg rtt: 117.000ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.53 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1990s) TCP 10.184.52.48:34864 > 34.131.204.19:443 S ttl=1 id=51726 iplen=40  seq=2852371991 win=1480 
+RCVD (0.2350s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.2360s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=51726 iplen=56 ]
+RCVD (0.4850s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 274.000ms | Min rtt: 24.000ms | Avg rtt: 107.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.49 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1970s) TCP 10.184.52.48:12118 > 34.131.204.19:443 S ttl=1 id=46283 iplen=40  seq=1640370743 win=1480 
+RCVD (0.2100s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=46283 iplen=56 ]
+RCVD (0.2100s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.4510s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 249.000ms | Min rtt: 8.000ms | Avg rtt: 88.333ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.45 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1910s) TCP 10.184.52.48:30224 > 34.131.204.19:443 S ttl=1 id=58024 iplen=40  seq=816457295 win=1480 
+RCVD (0.2000s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.2000s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=58024 iplen=56 ]
+RCVD (0.4540s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 256.000ms | Min rtt: 2.000ms | Avg rtt: 86.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.45 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1800s) TCP 10.184.52.48:30175 > 34.131.204.19:443 S ttl=1 id=38139 iplen=40  seq=214060573 win=1480 
+RCVD (0.1900s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=38139 iplen=56 ]
+RCVD (0.1900s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.4360s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 247.000ms | Min rtt: 1.000ms | Avg rtt: 83.000ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.44 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1820s) TCP 10.184.52.48:13789 > 34.131.204.19:443 S ttl=1 id=11688 iplen=40  seq=1797200626 win=1480 
+RCVD (0.1980s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=44456 iplen=56 ]
+RCVD (0.2100s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.4580s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 261.000ms | Min rtt: 1.000ms | Avg rtt: 91.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.46 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1890s) TCP 10.184.52.48:27039 > 34.131.204.19:443 S ttl=1 id=10570 iplen=40  seq=3766546765 win=1480 
+RCVD (0.2000s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.2050s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=43338 iplen=56 ]
+RCVD (0.4340s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 234.000ms | Min rtt: 5.000ms | Avg rtt: 79.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.43 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1930s) TCP 10.184.52.48:25293 > 34.131.204.19:443 S ttl=1 id=45967 iplen=40  seq=3424179540 win=1480 
+RCVD (0.2100s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=45967 iplen=56 ]
+RCVD (0.2140s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.4850s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 279.000ms | Min rtt: 4.000ms | Avg rtt: 97.000ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.49 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1740s) TCP 10.184.52.48:1846 > 34.131.204.19:443 S ttl=1 id=33869 iplen=40  seq=2597231769 win=1480 
+RCVD (0.1990s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=33869 iplen=56 ]
+RCVD (0.1990s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.4220s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 228.000ms | Min rtt: 5.000ms | Avg rtt: 79.333ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.42 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1770s) TCP 10.184.52.48:17127 > 34.131.204.19:443 S ttl=1 id=16750 iplen=40  seq=226620579 win=1480 
+RCVD (0.1880s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.1880s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=49518 iplen=56 ]
+RCVD (0.4160s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 232.000ms | Min rtt: 4.000ms | Avg rtt: 80.000ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.42 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1750s) TCP 10.184.52.48:7157 > 34.131.204.19:443 S ttl=1 id=50174 iplen=40  seq=517435729 win=1480 
+RCVD (0.1930s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=50174 iplen=56 ]
+RCVD (0.1930s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.4180s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 234.000ms | Min rtt: 9.000ms | Avg rtt: 84.000ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.42 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+RCVD (0.1830s) TCP 34.131.204.19:443 > 10.184.52.48:14064 A ttl=57 id=45779 iplen=40  seq=3629274429 win=10312 
+RCVD (0.1830s) TCP 34.131.204.19:443 > 10.184.52.48:14064 A ttl=57 id=45780 iplen=40  seq=3629274429 win=10312 
+SENT (0.1840s) TCP 10.184.52.48:50568 > 34.131.204.19:443 S ttl=1 id=55948 iplen=40  seq=2022380420 win=1480 
+RCVD (0.2030s) TCP 34.131.204.19:443 > 10.184.52.48:14064 A ttl=57 id=45781 iplen=40  seq=3629274429 win=10312 
+ 
+Max rtt: 0.000ms | Min rtt: 0.000ms | Avg rtt: 0.000ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (120B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.20 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1960s) TCP 10.184.52.48:56716 > 34.131.204.19:443 S ttl=1 id=670 iplen=40  seq=1560194727 win=1480 
+RCVD (0.2010s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+RCVD (0.2010s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=33438 iplen=56 ]
+RCVD (0.4460s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+ 
+Max rtt: 245.000ms | Min rtt: 245.000ms | Avg rtt: 81.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.45 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1840s) TCP 10.184.52.48:38037 > 34.131.204.19:443 S ttl=1 id=39283 iplen=40  seq=116543168 win=1480 
+RCVD (0.1990s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=39283 iplen=56 ]
+RCVD (0.1990s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+RCVD (0.4610s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+ 
+Max rtt: 264.000ms | Min rtt: 2.000ms | Avg rtt: 89.333ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.46 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1990s) TCP 10.184.52.48:42637 > 34.131.204.19:443 S ttl=1 id=23012 iplen=40  seq=4286388768 win=1480 
+RCVD (0.2110s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=55780 iplen=56 ]
+RCVD (0.2170s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+RCVD (0.4560s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+ 
+Max rtt: 248.000ms | Min rtt: 3.000ms | Avg rtt: 86.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.46 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1910s) TCP 10.184.52.48:45105 > 34.131.204.19:443 S ttl=1 id=21151 iplen=40  seq=1909992615 win=1480 
+RCVD (0.2050s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=53919 iplen=56 ]
+RCVD (0.2110s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+RCVD (0.4530s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+ 
+Max rtt: 251.000ms | Min rtt: 3.000ms | Avg rtt: 87.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.45 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.3000s) TCP 10.184.52.48:14513 > 34.131.204.19:443 S ttl=1 id=20743 iplen=40  seq=2288023448 win=1480 
+RCVD (0.3220s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=53511 iplen=56 ]
+RCVD (0.5720s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.8460s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 524.000ms | Min rtt: 250.000ms | Avg rtt: 258.000ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.85 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1800s) TCP 10.184.52.48:5341 > 34.131.204.19:443 S ttl=1 id=26591 iplen=40  seq=1467942820 win=1480 
+RCVD (0.2210s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=59359 iplen=56 ]
+RCVD (0.4850s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.7340s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 530.000ms | Min rtt: 17.000ms | Avg rtt: 276.000ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.73 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1660s) TCP 10.184.52.48:54674 > 34.131.204.19:443 S ttl=1 id=3025 iplen=40  seq=744465471 win=1480 
+RCVD (0.1830s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=35793 iplen=56 ]
+RCVD (0.4370s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.6770s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 507.000ms | Min rtt: 14.000ms | Avg rtt: 262.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.68 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1610s) TCP 10.184.52.48:56151 > 34.131.204.19:443 S ttl=1 id=9443 iplen=40  seq=1340371216 win=1480 
+RCVD (0.1740s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=42211 iplen=56 ]
+RCVD (0.4150s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.6540s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 487.000ms | Min rtt: 7.000ms | Avg rtt: 247.333ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.65 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1680s) TCP 10.184.52.48:8649 > 34.131.204.19:443 S ttl=1 id=17435 iplen=40  seq=1284835405 win=1480 
+RCVD (0.1880s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=50203 iplen=56 ]
+RCVD (0.4200s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.6480s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 467.000ms | Min rtt: 7.000ms | Avg rtt: 237.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.65 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1570s) TCP 10.184.52.48:32508 > 34.131.204.19:443 S ttl=1 id=17785 iplen=40  seq=382109991 win=1480 
+RCVD (0.1640s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=50553 iplen=56 ]
+RCVD (0.3950s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.6330s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 470.000ms | Min rtt: 1.000ms | Avg rtt: 234.333ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.63 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1510s) TCP 10.184.52.48:12059 > 34.131.204.19:443 S ttl=1 id=53447 iplen=40  seq=1560261545 win=1480 
+RCVD (0.1710s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=53447 iplen=56 ]
+RCVD (0.4330s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.6700s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 499.000ms | Min rtt: 262.000ms | Avg rtt: 253.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.67 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1370s) TCP 10.184.52.48:41869 > 34.131.204.19:443 S ttl=1 id=7196 iplen=40  seq=3959156002 win=1480 
+RCVD (0.1540s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=39964 iplen=56 ]
+RCVD (0.3830s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.6290s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 475.000ms | Min rtt: 229.000ms | Avg rtt: 234.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.63 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1780s) TCP 10.184.52.48:45658 > 34.131.204.19:443 S ttl=1 id=1089 iplen=40  seq=373436332 win=1480 
+RCVD (0.1850s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=33857 iplen=56 ]
+RCVD (0.4250s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.6480s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 465.000ms | Min rtt: 2.000ms | Avg rtt: 236.333ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.65 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1760s) TCP 10.184.52.48:60988 > 34.131.204.19:443 S ttl=1 id=28136 iplen=40  seq=1379717987 win=1480 
+RCVD (0.1820s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=60904 iplen=56 ]
+RCVD (0.4220s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.6740s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 493.000ms | Min rtt: 1.000ms | Avg rtt: 245.000ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.67 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1620s) TCP 10.184.52.48:63896 > 34.131.204.19:443 S ttl=1 id=35969 iplen=40  seq=1355642778 win=1480 
+RCVD (0.1680s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=35969 iplen=56 ]
+RCVD (0.4110s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.6470s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 480.000ms | Min rtt: 1.000ms | Avg rtt: 241.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.65 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1770s) TCP 10.184.52.48:45589 > 34.131.204.19:443 S ttl=1 id=49062 iplen=40  seq=2409921123 win=1480 
+RCVD (0.1820s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=49062 iplen=56 ]
+RCVD (0.4210s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.6490s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 468.000ms | Min rtt: 1.000ms | Avg rtt: 236.333ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.65 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.2020s) TCP 10.184.52.48:22328 > 34.131.204.19:443 S ttl=1 id=48222 iplen=40  seq=57599730 win=1480 
+RCVD (0.2090s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=48222 iplen=56 ]
+RCVD (0.4500s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.6720s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 465.000ms | Min rtt: 2.000ms | Avg rtt: 236.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.67 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1740s) TCP 10.184.52.48:17772 > 34.131.204.19:443 S ttl=1 id=17081 iplen=40  seq=2370074347 win=1480 
+RCVD (0.1810s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=49849 iplen=56 ]
+RCVD (0.4190s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.6710s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 492.000ms | Min rtt: 1.000ms | Avg rtt: 244.000ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.67 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1600s) TCP 10.184.52.48:50716 > 34.131.204.19:443 S ttl=1 id=25725 iplen=40  seq=569328295 win=1480 
+RCVD (0.1680s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=58493 iplen=56 ]
+RCVD (0.4570s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.7420s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 575.000ms | Min rtt: 1.000ms | Avg rtt: 288.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.74 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1860s) TCP 10.184.52.48:34520 > 34.131.204.19:443 S ttl=1 id=46875 iplen=40  seq=3073305585 win=1480 
+RCVD (0.2040s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=46875 iplen=56 ]
+RCVD (0.4380s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.6770s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 474.000ms | Min rtt: 1.000ms | Avg rtt: 236.666ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.68 seconds
+
+Starting Nping 0.7.94 ( https://nmap.org/nping ) at 2024-02-04 23:15 India Standard Time
+SENT (0.1760s) TCP 10.184.52.48:52222 > 34.131.204.19:443 S ttl=1 id=52230 iplen=40  seq=2330875883 win=1480 
+RCVD (0.1850s) ICMP [10.184.32.13 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=255 id=52230 iplen=56 ]
+RCVD (0.4220s) ICMP [10.255.107.3 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=253 id=0 iplen=56 ]
+RCVD (0.6320s) ICMP [10.119.233.65 > 10.184.52.48 TTL=0 during transit (type=11/code=0) ] IP [ttl=252 id=0 iplen=56 ]
+ 
+Max rtt: 451.000ms | Min rtt: 4.000ms | Avg rtt: 232.000ms
+Raw packets sent: 1 (54B) | Rcvd: 3 (168B) | Lost: 0 (0.00%)
+Nping done: 1 IP address pinged in 0.63 seconds
