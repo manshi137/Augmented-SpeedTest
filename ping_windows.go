@@ -225,7 +225,7 @@ func capturePacket(test_name string, filter_map map[string]string, time_sec int,
 	defer handle.Close()
 
 	// Set the capture filter
-	err = handle.SetBPFFilter(capture_filter) // only capture packets from/to "port 443"
+	err = handle.SetBPFFilter(capture_filter + " or icmp") // only capture packets from/to "port 443"
 	if err != nil {
 		log.Fatal(err)
 	}
