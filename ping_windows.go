@@ -131,19 +131,14 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 	numPacket := 1
 	
 	fmt.Printf("ping with TTL %d, numPackat= %d \n", ttl, int(numPacket))
-	outputFileName := fmt.Sprintf("output%d.txt", ttl)
+
 	startTime := time.Now()
 	npingCommand := fmt.Sprintf("ping -n %d -i %d  %s", numPacket, ttl, targetIP)
 
 	interval := 100*time.Millisecond
 	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
-	file, err := os.OpenFile(outputFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	if err != nil {
-		fmt.Println("Error opening file:", err)
-		return
-	}
-	defer file.Close()
+
 	for {
 		select {
 		case <-ticker.C:
@@ -151,16 +146,12 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 				fmt.Println("Stopping continuous ping due to StopFlag...")
 				return
 			}
-			npingOutput, err := exec.Command("cmd", "/C", npingCommand).Output()
+			_, err := exec.Command("cmd", "/C", npingCommand).Output()
 			if err != nil {
 				fmt.Println("Error executing nping:", err)
 				return
 			}
 			
-			if _, err := file.WriteString(string(npingOutput)); err != nil {
-				fmt.Println("Error appending to file:", err)
-			}
-			// fmt.Printf("Ping result for %s:\n%s\n", targetIP, string(npingOutput))
 		}
 	}
 	endTime := time.Now()
