@@ -8,12 +8,10 @@ import (
 	"github.com/google/gopacket/pcap"
     "github.com/google/gopacket/layers"
 	"github.com/google/gopacket/pcapgo"
-	// "ndt7module"
 	"os/exec"
-	"regexp"
 	"sync"
 	"time"
-	"io/ioutil"
+	// "io/ioutil"
 	"os"
 	// "./utils"
 )
@@ -128,97 +126,53 @@ func find_server(test_name string, filter_map map[string]string, wg *sync.WaitGr
 	return serverIPMax
 }
 
-// func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
-// 	defer wg.Done()
-// 	numPacket := 1
-	
-// 	fmt.Printf("ping with TTL %d, numPackat= %d \n", ttl, int(numPacket))
-// 	outputFileName := fmt.Sprintf("output%d.txt", ttl)
-// 	startTime := time.Now()
-// 	npingCommand := fmt.Sprintf("nping --tcp -p 8080 -c %d --ttl %d  %s", int(numPacket), ttl, targetIP)
-
-// 	interval := 100*time.Millisecond
-// 	ticker := time.NewTicker(interval)
-// 	defer ticker.Stop()
-// 	file, err := os.OpenFile(outputFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-// 	if err != nil {
-// 		fmt.Println("Error opening file:", err)
-// 		return
-// 	}
-// 	defer file.Close()
-// 	for {
-// 		select {
-// 		case <-ticker.C:
-// 			if getStopPingFlag() {
-// 				fmt.Println("Stopping continuous ping due to StopFlag...")
-// 				return
-// 			}
-// 			npingOutput, err := exec.Command("cmd", "/C", npingCommand).Output()
-// 			if err != nil {
-// 				fmt.Println("Error executing nping:", err)
-// 				return
-// 			}
-			
-// 			if _, err := file.WriteString(string(npingOutput)); err != nil {
-// 				fmt.Println("Error appending to file:", err)
-// 			}
-// 			// fmt.Printf("Ping result for %s:\n%s\n", targetIP, string(npingOutput))
-// 		}
-// 	}
-// 	endTime := time.Now()
-// 	fmt.Println("--------------------------------------------------")
-// 	duration := endTime.Sub(startTime)
-// 	fmt.Printf("Execution Time of ping: %v\n", duration)
-// 	fmt.Println("--------------------------------------------------")
-// 	fmt.Println("Done pingWithTTL w/o StopFlag....")
-// }
-
 func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 	defer wg.Done()
-	numPacket := 500.0
-	delay := 0.1
-	timeout := numPacket * delay 
-	fmt.Printf("ping with TTL %d and timeout %f\n", ttl, timeout)
-
+	numPacket := 1
+	
+	fmt.Printf("ping with TTL %d, numPackat= %d \n", ttl, int(numPacket))
+	outputFileName := fmt.Sprintf("output%d.txt", ttl)
 	startTime := time.Now()
-	// npingCommand := fmt.Sprintf("sudo ping -c 20 -t %d -i 0.1 %s", ttl, targetIP)
-	npingCommand := fmt.Sprintf("nping --tcp -c %d --ttl %d --delay %f %s", int(numPacket), ttl, delay, targetIP)
-	// npingCommand := fmt.Sprintf("sudo nping --tcp -c 20 --ttl %d --delay 0.1 %s", ttl, targetIP)
-	npingOutput, err := exec.Command("cmd", "/C", npingCommand).Output()
+	npingCommand := fmt.Sprintf("ping -n %d -i %d  %s", numPacket, ttl, targetIP)
+
+	interval := 100*time.Millisecond
+	ticker := time.NewTicker(interval)
+	defer ticker.Stop()
+	file, err := os.OpenFile(outputFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
-		fmt.Println("Error executing nping:", err)
+		fmt.Println("Error opening file:", err)
 		return
 	}
+	defer file.Close()
+	for {
+		select {
+		case <-ticker.C:
+			if getStopPingFlag() {
+				fmt.Println("Stopping continuous ping due to StopFlag...")
+				return
+			}
+			npingOutput, err := exec.Command("cmd", "/C", npingCommand).Output()
+			if err != nil {
+				fmt.Println("Error executing nping:", err)
+				return
+			}
+			
+			if _, err := file.WriteString(string(npingOutput)); err != nil {
+				fmt.Println("Error appending to file:", err)
+			}
+			// fmt.Printf("Ping result for %s:\n%s\n", targetIP, string(npingOutput))
+		}
+	}
 	endTime := time.Now()
-	// print npingOutput
-	fmt.Printf("%s\n", npingOutput)
 	fmt.Println("--------------------------------------------------")
 	duration := endTime.Sub(startTime)
 	fmt.Printf("Execution Time of ping: %v\n", duration)
 	fmt.Println("--------------------------------------------------")
-
-	outputFileName := fmt.Sprintf("output%d.txt", ttl)
-	err = ioutil.WriteFile(outputFileName, npingOutput, 0644)//write npingOutput to file
-	if err != nil {
-		fmt.Printf("Error writing to %s: %v\n", outputFileName, err)
-	}
-
-	ipMatches := regexp.MustCompile(`\d+\.\d+\.\d+\.\d+`).FindAllString(string(npingOutput), -1)
-	rttMatches := regexp.MustCompile(`Avg rtt: [-+]?\d*\.\d+`).FindAllString(string(npingOutput), -1)
-	
-	if len(ipMatches) >= 3 && len(rttMatches) > 0 {
-		hopIP := ipMatches[2]
-		rtt := rttMatches[0][9:]
-		fmt.Printf("Hop %d: ip = %s, rtt = %s ms\n", ttl, hopIP, rtt)
-		if hopIP == targetIP {
-			fmt.Println("Target IP reached!")
-			return
-		}
-	} else {
-		fmt.Printf("Hop %d: *\n", ttl)
-	}
-	fmt.Println("Done pingWithTTL....")
+	fmt.Println("Done pingWithTTL w/o StopFlag....")
 }
+
+
+
 func runNDT7Speedtest(wg *sync.WaitGroup) {
 	defer wg.Done()
 	fmt.Println("Running ndt7-speedtest...")
