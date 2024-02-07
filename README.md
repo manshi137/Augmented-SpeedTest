@@ -28,3 +28,8 @@
     cd ./cmd/ndt7-client
     go run main.go
   
+## How to run
+  ping_windows.go util.go --> capture.pcap
+  writecsv.go --> ndtcapture.csv
+  filter.go --> filtered_ndtcapture.csv
+  timecheck.go

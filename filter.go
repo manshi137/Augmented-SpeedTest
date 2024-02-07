@@ -79,12 +79,12 @@ func filterCSV(inputCSV, outputCSV, sourceIP, destinationIP string) error {
 }
 
 func main() {
-	inputCSV := "ndtcap.csv"
-	outputCSV := "filteredndtcap.csv"
-	sourceIP := "34.131.204.19"
-	destinationIP := "10.184.52.48"
+	inputCSV := "ndtcapture.csv"
+	outputCSV := "filtered_ndtcapture.csv"
+	serverIP := "115.113.240.203"
+	localIP := "10.184.59.62"
 
-	err := filterCSV(inputCSV, outputCSV, sourceIP, destinationIP)
+	err := filterCSV(inputCSV, outputCSV, serverIP, localIP)
 	if err != nil {
 		log.Fatal(err)
 	} else {

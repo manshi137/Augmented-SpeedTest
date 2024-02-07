@@ -182,87 +182,6 @@ func runNDT7Speedtest(wg *sync.WaitGroup) {
 	fmt.Println("Done running ndt7-speedtest.")
 }
 
-// func capturePacket(test_name string, filter_map map[string]string, time_sec int, wg *sync.WaitGroup) {
-// 	defer wg.Done()
-// 	// packet capture params
-// 	fmt.Println("Starting capturepackets...")
-// 	var snaplen int32 = 1600
-// 	iface, err := GetDefaultInterface()
-// 	fmt.Println("Interface is ", iface.Name)
-// 	if err != nil {
-// 	  fmt.Println("Failed to get default interface:", err)
-// 	  return
-// 	}
-	
-// 	capture_filter := filter_map[test_name]
-
-// 	fmt.Println("Capture filter is ", capture_filter)
-// 	desiredFriendlyName := "Intel(R) Wi-Fi 6E AX211 160MHz"
-
-// 	// Find the corresponding device name for the given friendly name
-// 	interfaces, err := pcap.FindAllDevs()
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	var desiredDeviceName string
-// 	for _, dev := range interfaces {
-// 		if dev.Description == desiredFriendlyName {
-// 			desiredDeviceName = dev.Name
-// 			break
-// 		}
-// 	}
-
-// 	// Check if the desired device name was found
-// 	if desiredDeviceName == "" {
-// 		log.Fatal("Desired network interface not found")
-// 	}
-// 	handle, err := pcap.OpenLive(desiredDeviceName, snaplen, false, pcap.BlockForever)
-// 	if err != nil {
-// 	  log.Fatal(err)
-// 	}
-	
-// 	defer handle.Close()
-  
-// 	// Set the capture filter
-// 	err = handle.SetBPFFilter(capture_filter) // only capture packets from/to "port 443"
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-	
-// 	outputFileName := fmt.Sprintf("pcap.txt")
-// 	file, err := os.OpenFile(outputFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-// 	if err != nil {
-// 		fmt.Println("Error opening file:", err)
-// 		return
-// 	}
-// 	defer file.Close()
-// 	// time_duration := time.Duration(time_sec) * time.Second
-// 	// Start capturing packets
-// 	packetSource := gopacket.NewPacketSource(handle, handle.LinkType()) //packetSource.Packets() is a channel
-// 	// capture packets for time_duration
-// 	// startTime := time.Now()
-// 	fmt.Println("Start capturing packets...")
-// 	for packet := range packetSource.Packets() {
-// 		// Process captured packet
-// 		// endTime := time.Now()
-// 		// duration := endTime.Sub(startTime)
-// 		if getStopPingFlag() {
-// 			fmt.Println("Stopping capturePacket due to StopFlag...")
-// 			return
-// 		}
-// 		// fmt.Println(packet)
-// 		// write packet to file
-// 		packetData := fmt.Sprintf("%v", packet)
-// 		// packetBytes := []byte(packetData)
-// 		if _, err := file.WriteString(packetData); err != nil {
-// 			fmt.Println("Error appending to file:", err)
-// 		}
-// 	}
-// 	fmt.Println("Done capturepackets w/o StopFlag.")
-// }
-
-
-
 func capturePacket(test_name string, filter_map map[string]string, time_sec int, wg *sync.WaitGroup) {
 	defer wg.Done()
 
@@ -389,7 +308,11 @@ func main() {
 
 	wg2.Wait()
 	fmt.Println("Done pingWithTTL and capturePacket....")
-
+	localIPv4 := GetLocalIP("v4")
+	localIPv6 := GetLocalIP("v6")
+	fmt.Println("Local IPv4: ", localIPv4)
+	fmt.Println("Local IPv6: ", localIPv6)
+	fmt.Println("Target IP: ", targetIP)
 	// process the pcap file: 
 	// 1) find out the ping RTTs; 
 	// 2) find out the end time for download and the end time of the test;
