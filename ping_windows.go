@@ -11,6 +11,7 @@ import (
 	"os/exec"
 	"sync"
 	"time"
+	"regexp"
 	// "io/ioutil"
 	"os"
 	// "./utils"
@@ -135,31 +136,40 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 	startTime := time.Now()
 	npingCommand := fmt.Sprintf("ping -n %d -i %d  %s", numPacket, ttl, targetIP)
 
-	interval := 100*time.Millisecond
+	interval := 10000*time.Millisecond
 	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
-
+	var pingOutput []byte
 	for {
 		select {
 		case <-ticker.C:
 			if getStopPingFlag() {
 				fmt.Println("Stopping continuous ping due to StopFlag...")
+				endTime := time.Now()
+				fmt.Println("--------------------------------------------------")
+				duration := endTime.Sub(startTime)
+				fmt.Printf("Execution Time of ping: %v\n", duration, " ttl=%d", ttl)
+				fmt.Println("--------------------------------------------------")
+				ipRegex := regexp.MustCompile(`(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|(?:[0-9]{1,3}\.){3}[0-9]{1,3}`)
+
+				// Find all matches in the output string
+				ipMatches := ipRegex.FindAllString(string(pingOutput), -1)
+
+				// Print the extracted IP addresses
+				for _, ip := range ipMatches {
+					fmt.Println("IP Address:", ip)
+				}
 				return
 			}
-			_, err := exec.Command("cmd", "/C", npingCommand).Output()
+			pingOutput1, err := exec.Command("cmd", "/C", npingCommand).Output()
 			if err != nil {
-				fmt.Println("Error executing nping:", err)
+				fmt.Println("Error executing nping:", err, ttl)
 				return
 			}
-			
+			pingOutput = pingOutput1
+			// fmt.Print(string(pingOutput)[0])
 		}
 	}
-	endTime := time.Now()
-	fmt.Println("--------------------------------------------------")
-	duration := endTime.Sub(startTime)
-	fmt.Printf("Execution Time of ping: %v\n", duration)
-	fmt.Println("--------------------------------------------------")
-	fmt.Println("Done pingWithTTL w/o StopFlag....")
 }
 
 
