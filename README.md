@@ -33,4 +33,4 @@
   writecsv.go --> ndtcapture.csv
   filter.go --> filtered_ndtcapture.csv
   timecheck.go --> upload download times
-  ping_reply_map.go --> ping_reply.csv
+  ping_reply_map.go --> ping_reply.csv (with ttl number)
