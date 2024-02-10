@@ -7,8 +7,9 @@ import (
 	"github.com/google/gopacket/pcap"
 	"github.com/google/gopacket/layers"
 	"encoding/binary"
-	// "strings"
+	"strings"
 	"os"
+	"io/ioutil"
 	"encoding/csv"
 	// "time"
 )
@@ -48,7 +49,7 @@ func getRequestSequenceNumber(packet gopacket.Packet) string {
 	}
 	return ""
 }
-func writeMatchingPacketsToCSV(echoRequests, echoReply map[string]gopacket.Packet) error {
+func writeMatchingPacketsToCSV(echoRequests, echoReply map[string]gopacket.Packet, ipAddresses []string) error {
 	// Open the CSV file for writing
 	file, err := os.Create("ping_reply.csv")
 	if err != nil {
@@ -61,7 +62,7 @@ func writeMatchingPacketsToCSV(echoRequests, echoReply map[string]gopacket.Packe
 	defer writer.Flush()
 
 	// Write header to CSV file
-	header := []string{"SequenceNumber","RequestTime", "ReplyTime", "RequestSourceIP", "RequestDestIP", "ReplySourceIP", "ReplyDestIP", "ReplyTTLexpiredIP"}
+	header := []string{"SequenceNumber","RequestTime", "ReplyTime", "RequestSourceIP", "RequestDestIP", "ReplySourceIP", "ReplyDestIP", "ReplyTTLexpiredIP", "TTL"}
 	err = writer.Write(header)
 	if err != nil {
 		return fmt.Errorf("error writing CSV header: %w", err)
@@ -78,9 +79,16 @@ func writeMatchingPacketsToCSV(echoRequests, echoReply map[string]gopacket.Packe
 			requestSourceIP, requestDestIP := getRequestIPs(request)
 			replySourceIP, replyDestIP := getRequestIPs(reply)
 			replyTTLExpiredIP := getRequestTTLExpiredIP(reply)
+			ttl:= ""
 
+			for ind, ip := range ipAddresses {
+				if ip == replySourceIP {
+					ttl = fmt.Sprintf("%d", ind)
+				}
+			}
+		
 			// Write fields to CSV file
-			record := []string{sequenceNumber, requestTime, replyTime, requestSourceIP, requestDestIP, replySourceIP, replyDestIP, replyTTLExpiredIP}
+			record := []string{sequenceNumber, requestTime, replyTime, requestSourceIP, requestDestIP, replySourceIP, replyDestIP, replyTTLExpiredIP, ttl}
 			err := writer.Write(record)
 			if err != nil {
 				return fmt.Errorf("error writing CSV record: %w", err)
@@ -98,6 +106,21 @@ func main() {
 		log.Fatal(err)
 	}
 	defer handle.Close()
+
+	// ------------------------------------------------------------------
+	filePath := "ip_addresses.txt"
+	content, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		fmt.Println("Error reading file:", err)
+		return
+	}
+	ipAddresses := strings.Split(string(content), "\n")
+	fmt.Println("IP Addresses:")
+	for _, ip := range ipAddresses {
+		fmt.Println(ip)
+	}
+	// -------------------------------------------------------------------
+
 
 	// Create a packet source from the handle
 	packetSource := gopacket.NewPacketSource(handle, handle.LinkType())
@@ -118,10 +141,11 @@ func main() {
 				if icmp.TypeCode.Type() == layers.ICMPv4TypeEchoRequest {
 					// Store Echo Request packet by identifier and sequence number
 					key := fmt.Sprintf("%d", icmp.Seq)
+
 					echoRequests[key] = packet
 				
 					// Print identifier and sequence number of this echo request
-					fmt.Printf("Echo Request Sequence Number: %d\n",icmp.Seq)
+					// fmt.Printf("Echo Request Sequence Number: %d\n",icmp.Seq)
 				}
 
 				// Check if the ICMP packet is a Time Exceeded (Type 11)
@@ -139,14 +163,14 @@ func main() {
 					sequenceNumber := binary.BigEndian.Uint16(lastTwoBytes)
 				
 					// Print the extracted sequence number
-					fmt.Printf("Reply Sequence Number: %d\n", sequenceNumber)
+					// fmt.Printf("Reply Sequence Number: %d\n", sequenceNumber)
 					key := fmt.Sprintf("%d", sequenceNumber)
     				echoReply[key] = packet
 				}
 			}
 		}
 	}
-	err1 := writeMatchingPacketsToCSV(echoRequests, echoReply)
+	err1 := writeMatchingPacketsToCSV(echoRequests, echoReply, ipAddresses)
 	if err1 != nil {
 		fmt.Println("Error writing to CSV:", err1)
 	}
