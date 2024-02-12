@@ -32,5 +32,5 @@
   ping_windows.go util.go --> capture.pcap, save_ip.txt (targetIP, localIP, hop1, hop2, ...)
   writecsv.go --> ndtcapture.csv
   filter.go --> filtered_ndtcapture.csv
-  timecheck.go --> upload download times
+  timecheck.go --> times.txt
   ping_reply_map.go --> ping_reply.csv (with ttl number)

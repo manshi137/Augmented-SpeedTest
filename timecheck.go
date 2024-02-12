@@ -5,8 +5,30 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	// "time"
 )
- 
+var timeArray [2]string
+func writeArrayToFile(filename string) error {
+	// Create a new file
+	file, err := os.Create(filename)
+	if err != nil {
+		return fmt.Errorf("error creating file: %v", err)
+	}
+	defer file.Close()
+
+	// Write each element of the array to the file
+	for _, item := range timeArray {
+		_, err := file.WriteString(item + "\n")
+		if err != nil {
+			return fmt.Errorf("error writing to file: %v", err)
+		}
+	}
+
+	fmt.Println("Upload / Download time written to times.txt successfully!")
+	return nil
+}
+
+
 func main() {
 	// Open the CSV file
 	file, err := os.Open("filtered_ndtcapture.csv")
@@ -56,6 +78,10 @@ func main() {
 			// Check if IP1 to IP2 packets are in majority
 			// fmt.Println("upload = ", upload, " download = ", download)
 			if download < upload {
+				if(timeArray[0] == "" ){
+					timeArray[0] = record[0]
+				}
+				timeArray[1] = record[0]
 				fmt.Println("upload packets are in majority at this timestamp = ", record[0], " upload packets = ", upload, " download packets = ", download )
 				// Record timestamp or perform other actions
 			}
@@ -63,6 +89,12 @@ func main() {
 			download = 0
 			upload = 0
 		}
+	}
+	timeArray = [2]string{"", ""}
+
+	err1 := writeArrayToFile("times.txt")
+	if err1 != nil {
+		fmt.Println("Error:", err)
 	}
 }
 

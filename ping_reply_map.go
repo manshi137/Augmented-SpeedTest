@@ -11,9 +11,44 @@ import (
 	"os"
 	"io/ioutil"
 	"encoding/csv"
-	// "time"
+	"time"
+	"bufio"
 )
+var times []time.Time
 
+func readTimesFromFile(filename string) ([]time.Time, error) {
+	// Open the file
+	file, err := os.Open(filename)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	var times []time.Time
+
+	// Create a scanner to read the file line by line
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		// Read each line as a string
+		line := scanner.Text()
+
+		// Parse the string into a time.Time value
+		t, err := time.Parse("15:04:05.999999", line)
+		if err != nil {
+			return nil, fmt.Errorf("error parsing time: %w", err)
+		}
+
+		// Append the parsed time to the times slice
+		times = append(times, t)
+	}
+
+	// Check for scanner errors
+	if err := scanner.Err(); err != nil {
+		return nil, fmt.Errorf("error reading file: %w", err)
+	}
+
+	return times, nil
+}
 // Helper function to extract source and destination IPs from packet
 func getRequestIPs(packet gopacket.Packet) (string, string) {
 	ipLayer := packet.Layer(layers.LayerTypeIPv4)
@@ -156,14 +191,9 @@ func main() {
 						return
 					}
 				
-					// Extract the last 2 bytes from the payload
+					// Extract the last 2 bytes from the payload to match with sequence number
 					lastTwoBytes := icmp.Payload[len(icmp.Payload)-2:]
-				
-					// Convert the bytes to a 16-bit unsigned integer
 					sequenceNumber := binary.BigEndian.Uint16(lastTwoBytes)
-				
-					// Print the extracted sequence number
-					// fmt.Printf("Reply Sequence Number: %d\n", sequenceNumber)
 					key := fmt.Sprintf("%d", sequenceNumber)
     				echoReply[key] = packet
 				}
@@ -174,5 +204,15 @@ func main() {
 	if err1 != nil {
 		fmt.Println("Error writing to CSV:", err1)
 	}
+	times, err := readTimesFromFile("times.txt")
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+	fmt.Println("Times read from file:")
+	for _, t := range times {
+		fmt.Println(t)
+	}
+
 
 }

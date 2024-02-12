@@ -24,6 +24,7 @@ var stopPingFlag bool
 var stopPingMutex sync.Mutex
 var ipAddressArray [numThreads+1+3]string
 
+
 func setStopPingFlag(value bool) {
 	stopPingMutex.Lock()
 	stopPingFlag = value
