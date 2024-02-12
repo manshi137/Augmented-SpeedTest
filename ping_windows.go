@@ -137,7 +137,7 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 	startTime := time.Now()
 	npingCommand := fmt.Sprintf("ping -n %d -i %d  %s", numPacket, ttl, targetIP)
 
-	interval := 1000*time.Millisecond
+	interval := 10000*time.Millisecond
 	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
 	var pingOutput []byte
@@ -151,12 +151,19 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 				duration := endTime.Sub(startTime)
 				fmt.Printf("Execution Time of ping: %v , ttl= %d \n", duration, ttl)
 				fmt.Println("--------------------------------------------------")
-				ipRegex := regexp.MustCompile(`(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|(?:[0-9]{1,3}\.){3}[0-9]{1,3}`)
-
-				//get ip of hop 
-				ipMatches := ipRegex.FindAllString(string(pingOutput), -1)
-				fmt.Println("IP Address:", ipMatches[1], " ttl= ", ttl)
-				ipAddressArray[ttl]=ipMatches[1];
+				
+				ipv4Regex := regexp.MustCompile(`(?:[0-9]{1,3}\.){3}[0-9]{1,3}`)
+				ipv4Matches := ipv4Regex.FindAllString(string(pingOutput), -1)
+				if len(ipv4Matches) > 0 {
+					fmt.Println("IPv4 Address:", ipv4Matches[1], " ttl= ", ttl)
+					ipAddressArray[ttl]=ipv4Matches[1];
+				}
+				ipv6Regex := regexp.MustCompile(`(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}`)
+				ipv6Matches := ipv6Regex.FindAllString(string(pingOutput), -1)
+				if len(ipv6Matches) > 0 {
+					fmt.Println("IPv6 Address:", ipv6Matches[1], " ttl= ", ttl)
+					ipAddressArray[ttl]=ipv6Matches[1];
+				}
 				return
 			}
 			pingOutput1, err := exec.Command("cmd", "/C", npingCommand).Output()
