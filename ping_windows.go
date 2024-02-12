@@ -137,8 +137,10 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 
 	startTime := time.Now()
 	npingCommand := fmt.Sprintf("ping -n %d -i %d  %s", numPacket, ttl, targetIP)
-
-	interval := 10000*time.Millisecond
+	// ping = ipmatches[1]
+	// npingCommand := fmt.Sprintf("nping --icmp -c %d --ttl %d %s", int(numPacket), ttl, targetIP)
+	// nping = ipmatches[2]
+	interval := 1000*time.Millisecond
 	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
 	var pingOutput []byte
