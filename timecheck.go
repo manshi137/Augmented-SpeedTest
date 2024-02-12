@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"io/ioutil"
+	"strings"
 	// "time"
 )
 var timeArray [2]string
@@ -45,7 +47,18 @@ func main() {
 	download := 0
 	upload := 0
 	packetCount := 0
- 
+	filePath := "ip_addresses.txt"
+	content, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		fmt.Println("Error reading file:", err)
+		return
+	}
+	ipAddresses := strings.Split(string(content), "\n")
+	// fmt.Println("IP Addresses:")
+	timeArray = [2]string{"", ""}
+	serverIP := ipAddresses[6]
+	localIPv4 := ipAddresses[4]
+	fmt.Println("serverip= ", serverIP, " localipv4= ", localIPv4)
 	// Iterate over each line in the CSV file
 	for {
 		// Read the next record
@@ -57,16 +70,15 @@ func main() {
 		// Extract source and destination IPs from the record
 		ip1 := record[1] //
 		ip2 := record[2]
-		serverIP := "115.113.240.203"
-		localIP := "10.184.59.62"
+		
 		// Increment counters based on packet direction
 		pktSize, _ := strconv.Atoi(record[3])
 		// fmt.Println("pktsize = ", record[3], pktSize)
 
-		if ip1 == serverIP && ip2 == localIP {
+		if ip1 == serverIP && ip2 == localIPv4 {
 			download+= pktSize
 			// fmt.Println("download = ", download)
-		} else if ip1 == localIP && ip2 == serverIP {
+		} else if ip1 == localIPv4 && ip2 == serverIP {
 			upload+= pktSize
 			// fmt.Println("upload = ", upload)
 		}
@@ -90,7 +102,7 @@ func main() {
 			upload = 0
 		}
 	}
-	timeArray = [2]string{"", ""}
+	
 
 	err1 := writeArrayToFile("times.txt")
 	if err1 != nil {

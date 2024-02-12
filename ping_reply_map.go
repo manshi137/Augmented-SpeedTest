@@ -91,13 +91,14 @@ func writeMatchingPacketsToCSV(echoRequests, echoReply map[string]gopacket.Packe
 		return fmt.Errorf("error creating CSV file: %w", err)
 	}
 	defer file.Close()
-
+	upload_start:= times[0]
+	idle_start:= times[1]
 	// Create a CSV writer
 	writer := csv.NewWriter(file)
 	defer writer.Flush()
 
 	// Write header to CSV file
-	header := []string{"SequenceNumber","RequestTime", "ReplyTime", "RequestSourceIP", "RequestDestIP", "ReplySourceIP", "ReplyDestIP", "ReplyTTLexpiredIP", "TTL"}
+	header := []string{"SequenceNumber","RequestTime", "ReplyTime", "RequestSourceIP", "RequestDestIP", "ReplySourceIP", "ReplyDestIP", "ReplyTTLexpiredIP", "TTL", "Download/Upload/Idle"}
 	err = writer.Write(header)
 	if err != nil {
 		return fmt.Errorf("error writing CSV header: %w", err)
@@ -115,15 +116,24 @@ func writeMatchingPacketsToCSV(echoRequests, echoReply map[string]gopacket.Packe
 			replySourceIP, replyDestIP := getRequestIPs(reply)
 			replyTTLExpiredIP := getRequestTTLExpiredIP(reply)
 			ttl:= ""
+			dui:=""
 
 			for ind, ip := range ipAddresses {
 				if ip == replySourceIP {
 					ttl = fmt.Sprintf("%d", ind)
 				}
 			}
-		
+			requestTimeParsed, _ := time.Parse("15:04:05.999999999", requestTime)
+			
+			if requestTimeParsed.Before(upload_start) {
+				dui = "download"
+			} else if (requestTimeParsed.After(upload_start) && requestTimeParsed.Before(idle_start)) ||  requestTimeParsed.Equal(upload_start) || requestTimeParsed.Equal(idle_start)  {
+				dui = "upload"
+			} else {
+				dui = "idle"
+			}
 			// Write fields to CSV file
-			record := []string{sequenceNumber, requestTime, replyTime, requestSourceIP, requestDestIP, replySourceIP, replyDestIP, replyTTLExpiredIP, ttl}
+			record := []string{sequenceNumber, requestTime, replyTime, requestSourceIP, requestDestIP, replySourceIP, replyDestIP, replyTTLExpiredIP, ttl, dui}
 			err := writer.Write(record)
 			if err != nil {
 				return fmt.Errorf("error writing CSV record: %w", err)
@@ -200,19 +210,21 @@ func main() {
 			}
 		}
 	}
+	times, _ = readTimesFromFile("times.txt")
+	fmt.Println("Times read from file:")
+	for i, t := range times {
+		fmt.Printf("Index %d: %s\n", i, t)
+	}
 	err1 := writeMatchingPacketsToCSV(echoRequests, echoReply, ipAddresses)
 	if err1 != nil {
 		fmt.Println("Error writing to CSV:", err1)
 	}
-	times, err := readTimesFromFile("times.txt")
+
 	if err != nil {
 		fmt.Println("Error:", err)
 		return
 	}
-	fmt.Println("Times read from file:")
-	for _, t := range times {
-		fmt.Println(t)
-	}
+	
 
 
 }

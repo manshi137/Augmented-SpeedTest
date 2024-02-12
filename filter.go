@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"io/ioutil"
+	"strings"
 )
 
 func filterCSV(inputCSV, outputCSV, sourceIP, destinationIP string) error {
@@ -81,12 +83,24 @@ func filterCSV(inputCSV, outputCSV, sourceIP, destinationIP string) error {
 func main() {
 	inputCSV := "ndtcapture.csv"
 	outputCSV := "filtered_ndtcapture.csv"
-	serverIP := "115.113.240.203"
-	localIP := "10.184.59.62"
 
-	err := filterCSV(inputCSV, outputCSV, serverIP, localIP)
+	filePath := "ip_addresses.txt"
+	content, err := ioutil.ReadFile(filePath)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("Error reading file:", err)
+		return
+	}
+	ipAddresses := strings.Split(string(content), "\n")
+	fmt.Println("IP Addresses:")
+	for _, ip := range ipAddresses {
+		fmt.Println(ip)
+	}
+	serverIP := ipAddresses[6]
+	localIPv4 := ipAddresses[4]
+
+	err1 := filterCSV(inputCSV, outputCSV, serverIP, localIPv4)
+	if err1 != nil {
+		log.Fatal(err1)
 	} else {
 		fmt.Println("Filtered CSV file created successfully.")
 	}
