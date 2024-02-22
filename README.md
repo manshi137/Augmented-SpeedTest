@@ -33,4 +33,12 @@
   writecsv.go --> ndtcapture.csv
   filter.go --> filtered_ndtcapture.csv
   timecheck.go --> times.txt
-  ping_reply_map.go --> ping_reply.csv (with ttl number)
+  ping_reply_map.go --> ping_reply.csv 
+  ttest.py --> 
+
+
+## References
+  https://dl.acm.org/doi/pdf/10.1145/3230543.3230549
+  https://www.mdpi.com/1424-8220/23/2/923
+  https://www.researchgate.net/publication/354194462_Measuring_and_Localising_Congestion_in_Mobile_Broadband_Networks
+
