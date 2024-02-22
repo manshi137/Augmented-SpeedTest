@@ -3,6 +3,7 @@ import csv
 import numpy as np
 import scipy.stats as stats
 from datetime import datetime
+import os
 
 hops = 3
 alpha = 0.05
@@ -72,7 +73,5 @@ def run_ttest():
     download_mean = []
     idle_mean = []
 
-
-# run the ttest
 run_ttest()
 

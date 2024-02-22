@@ -1,0 +1,32 @@
+hop=  1 download vs idle
+t_statistic=  1.9418292124791878
+p_value=  0.10018749261059492
+
+
+hop=  2 download vs idle
+t_statistic=  -2.2008436264263582
+p_value=  0.07002076420924506
+
+
+hop=  3 download vs idle
+t_statistic=  0.5494557993083568
+p_value=  0.6025271821218451
+
+
+------------------------------------------- 
+
+hop=  1 upload vs idle
+t_statistic=  6.249946358950298
+p_value=  0.000777775142595646
+
+
+hop=  2 upload vs idle
+t_statistic=  -0.12411782680258264
+p_value=  0.9052756896135226
+
+
+hop=  3 upload vs idle
+t_statistic=  0.6355542138631134
+p_value=  0.5485247158748893
+
+
