@@ -145,21 +145,23 @@ func runping(npingCommand string) ([]byte){
 func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 	defer wg.Done()
 	numPacket := 1
+	delay := "100ms"
+
 	
 	fmt.Printf("ping with TTL %d, numPackat= %d \n", ttl, int(numPacket))
 
 	startTime := time.Now()
-	npingCommand := fmt.Sprintf("ping -n %d -i %d  %s", numPacket, ttl, targetIP)
-	// ping = ipmatches[1]
-	// npingCommand := fmt.Sprintf("nping --icmp -c %d --ttl %d %s", int(numPacket), ttl, targetIP)
-	// nping = ipmatches[2]
-	interval := ticker_t
-	ticker := time.NewTicker(interval)
-	defer ticker.Stop()
-	var pingOutput []byte
+	npingCommand := fmt.Sprintf("nping --icmp --count %d --ttl %d --delay %s %s", int(numPacket), ttl, delay, targetIP)
+	fmt.Println(npingCommand)
+	pingOutput, err := exec.Command("cmd", "/C", npingCommand).Output()
+	if err != nil {
+		fmt.Println("Error executing nping:", err, ttl)
+		return
+	}
+	fmt.Println("nping output: ")
+	fmt.Println(string(pingOutput))
+
 	for {
-		select {
-		case <-ticker.C:
 			if getStopPingFlag() {
 				fmt.Println("Stopping continuous ping due to StopFlag...")
 				endTime := time.Now()
@@ -167,29 +169,21 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 				duration := endTime.Sub(startTime)
 				fmt.Printf("Execution Time of ping: %v , ttl= %d \n", duration, ttl)
 				fmt.Println("--------------------------------------------------")
-				
 				ipv4Regex := regexp.MustCompile(`(?:[0-9]{1,3}\.){3}[0-9]{1,3}`)
 				ipv4Matches := ipv4Regex.FindAllString(string(pingOutput), -1)
 				if len(ipv4Matches) > 0 {
-					fmt.Println("IPv4 Address:", ipv4Matches[1], " ttl= ", ttl)
-					ipAddressArray[ttl]=ipv4Matches[1];
+					fmt.Println("IPv4 Address:", ipv4Matches[2], " ttl= ", ttl)
+					ipAddressArray[ttl]=ipv4Matches[2];
 				}
 				ipv6Regex := regexp.MustCompile(`(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}`)
 				ipv6Matches := ipv6Regex.FindAllString(string(pingOutput), -1)
 				if len(ipv6Matches) > 0 {
-					fmt.Println("IPv6 Address:", ipv6Matches[1], " ttl= ", ttl)
-					ipAddressArray[ttl]=ipv6Matches[1];
+					fmt.Println("IPv6 Address:", ipv6Matches[2], " ttl= ", ttl)
+					ipAddressArray[ttl]=ipv6Matches[2];
 				}
 				return
 			}
-			// pingOutput1, err := exec.Command("cmd", "/C", npingCommand).Output()
-			// if err != nil {
-			// 	fmt.Println("Error executing ping:", err, ttl)
-			// 	return
-			// }
-			pingOutput1:= runping(npingCommand)
-			pingOutput = pingOutput1
-		}
+		
 	}
 }
 
