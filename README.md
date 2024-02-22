@@ -34,7 +34,7 @@
   filter.go --> filtered_ndtcapture.csv
   timecheck.go --> times.txt
   ping_reply_map.go --> ping_reply.csv 
-  ttest.py --> 
+  ttest.py --> ttest_result.txt
 
 
 ## References
