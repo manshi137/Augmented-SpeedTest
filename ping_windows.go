@@ -129,6 +129,16 @@ func find_server(test_name string, filter_map map[string]string, wg *sync.WaitGr
 	return serverIPMax
 }
 
+func runping(npingCommand string) ([]byte){
+    cmd := exec.Command("cmd", "/C", npingCommand)
+    output, err := cmd.Output()
+    if err != nil {
+        fmt.Println("run ping error:", err)
+        return output
+    }
+    return output
+}
+
 func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 	defer wg.Done()
 	numPacket := 1
@@ -169,11 +179,12 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 				}
 				return
 			}
-			pingOutput1, err := exec.Command("cmd", "/C", npingCommand).Output()
-			if err != nil {
-				fmt.Println("Error executing ping:", err, ttl)
-				return
-			}
+			// pingOutput1, err := exec.Command("cmd", "/C", npingCommand).Output()
+			// if err != nil {
+			// 	fmt.Println("Error executing ping:", err, ttl)
+			// 	return
+			// }
+			pingOutput1:= runping(npingCommand)
 			pingOutput = pingOutput1
 		}
 	}
