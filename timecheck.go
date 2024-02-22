@@ -66,7 +66,7 @@ func main() {
 	// Iterate over each line in the CSV file
 
 	var prevTime time.Time
-	fmt.Println("prev time 1= ", prevTime)
+
 
 
 	for {
@@ -98,14 +98,7 @@ func main() {
 		// Increment packet count
 		packetCount++
 
-		if packetCount==3{
-			fmt.Println("len of ip1= ", len(ip1))
-			fmt.Println("len of serverip= ", len(serverIP))
-			ip1 = strings.TrimSpace(ip1)
 
-			fmt.Println("ip1=", ip1, "h")
-			fmt.Println("ip2=", ip2, "h")
-		}
 
 		timestamp := record[0]
 
@@ -119,7 +112,7 @@ func main() {
 			if prevTime.IsZero(){
 
 				prevTime = currentTime
-				fmt.Println("prevTime  2= ", prevTime)
+				// fmt.Println("prevTime  2= ", prevTime)
 			}
 
 			diff := currentTime.Sub(prevTime)
@@ -137,14 +130,14 @@ func main() {
 						timeArray[0] = record[0]
 					}
 					timeArray[1] = record[0]
-					fmt.Println("upload packets are in majority at this timestamp = ", record[0], " upload packets = ", upload, " download packets = ", download )
+					// fmt.Println("upload packets are in majority at this timestamp = ", record[0], " upload packets = ", upload, " download packets = ", download )
 					// Record timestamp or perform other actions
 				}
 				// Reset counters
 				download = 0
 				upload = 0
 				prevTime= currentTime
-				fmt.Println("packetcount= ", packetCount)
+				// fmt.Println("packetcount= ", packetCount)
 				packetCount=0
 			}
 		}

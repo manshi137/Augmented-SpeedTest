@@ -19,6 +19,7 @@ import (
 // import "github.com/manshi137/COD891/utils"
 const (
 	numThreads = 3
+	ticker_t = 100*time.Millisecond
 )
 var stopPingFlag bool
 var stopPingMutex sync.Mutex
@@ -130,8 +131,10 @@ func find_server(test_name string, filter_map map[string]string, wg *sync.WaitGr
 }
 
 func runping(npingCommand string) ([]byte){
+	time.Sleep(10*time.Millisecond)
     cmd := exec.Command("cmd", "/C", npingCommand)
     output, err := cmd.Output()
+
     if err != nil {
         fmt.Println("run ping error:", err)
         return output
@@ -150,7 +153,7 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 	// ping = ipmatches[1]
 	// npingCommand := fmt.Sprintf("nping --icmp -c %d --ttl %d %s", int(numPacket), ttl, targetIP)
 	// nping = ipmatches[2]
-	interval := 100*time.Millisecond
+	interval := ticker_t
 	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
 	var pingOutput []byte
