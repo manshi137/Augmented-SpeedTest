@@ -23,7 +23,7 @@ const (
 var stopPingFlag bool
 var stopPingMutex sync.Mutex
 var ipAddressArray [numThreads+1+3]string
-
+var locks [numThreads+1+3]sync.Mutex
 
 func setStopPingFlag(value bool) {
 	stopPingMutex.Lock()
@@ -144,13 +144,17 @@ func runping(ch chan<- string, npingCommand string, ttl int) {
 	ipv4Matches := ipv4Regex.FindAllString(string(pingOutput), -1)
 	if len(ipv4Matches) > 0 {
 		// fmt.Println("IPv4 Address:", ipv4Matches[1], " ttl= ", ttl)
+		locks[ttl].Lock()
 		ipAddressArray[ttl]=ipv4Matches[1];
+		locks[ttl].Unlock()
 	}
 	ipv6Regex := regexp.MustCompile(`(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}`)
 	ipv6Matches := ipv6Regex.FindAllString(string(pingOutput), -1)
 	if len(ipv6Matches) > 0 {
 		// fmt.Println("IPv6 Address:", ipv6Matches[1], " ttl= ", ttl)
+		locks[ttl].Lock()
 		ipAddressArray[ttl]=ipv6Matches[1];
+		locks[ttl].Unlock()
 	}
 
     ch <- string(pingOutput)
