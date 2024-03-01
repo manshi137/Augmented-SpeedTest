@@ -19,7 +19,6 @@ import (
 // import "github.com/manshi137/COD891/utils"
 const (
 	numThreads = 3
-	ticker_t = 10*time.Millisecond
 )
 var stopPingFlag bool
 var stopPingMutex sync.Mutex
@@ -130,16 +129,18 @@ func find_server(test_name string, filter_map map[string]string, wg *sync.WaitGr
 	return serverIPMax
 }
 
-func runping(npingCommand string) ([]byte){
-	time.Sleep(1*time.Millisecond)
+func runping(ch chan<- string, npingCommand string) {
+    time.Sleep(1 * time.Millisecond)
+
     cmd := exec.Command("cmd", "/C", npingCommand)
-    output, err := cmd.Output()
+    output, err := cmd.CombinedOutput()
 
     if err != nil {
         fmt.Println("run ping error:", err)
-        return output
+        ch <- fmt.Sprintf("Error: %v", err)
+        return
     }
-    return output
+    ch <- string(output)
 }
 
 func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
@@ -153,7 +154,7 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 	// ping = ipmatches[1]
 	// npingCommand := fmt.Sprintf("nping --icmp -c %d --ttl %d %s", int(numPacket), ttl, targetIP)
 	// nping = ipmatches[2]
-	interval := ticker_t
+	interval := 100*time.Millisecond
 	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
 	var pingOutput []byte
@@ -168,27 +169,22 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 				fmt.Printf("Execution Time of ping: %v , ttl= %d \n", duration, ttl)
 				fmt.Println("--------------------------------------------------")
 				
-				ipv4Regex := regexp.MustCompile(`(?:[0-9]{1,3}\.){3}[0-9]{1,3}`)
-				ipv4Matches := ipv4Regex.FindAllString(string(pingOutput), -1)
-				if len(ipv4Matches) > 0 {
-					fmt.Println("IPv4 Address:", ipv4Matches[1], " ttl= ", ttl)
-					ipAddressArray[ttl]=ipv4Matches[1];
-				}
-				ipv6Regex := regexp.MustCompile(`(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}`)
-				ipv6Matches := ipv6Regex.FindAllString(string(pingOutput), -1)
-				if len(ipv6Matches) > 0 {
-					fmt.Println("IPv6 Address:", ipv6Matches[1], " ttl= ", ttl)
-					ipAddressArray[ttl]=ipv6Matches[1];
-				}
+				// ipv4Regex := regexp.MustCompile(`(?:[0-9]{1,3}\.){3}[0-9]{1,3}`)
+				// ipv4Matches := ipv4Regex.FindAllString(string(pingOutput), -1)
+				// if len(ipv4Matches) > 0 {
+				// 	fmt.Println("IPv4 Address:", ipv4Matches[1], " ttl= ", ttl)
+				// 	ipAddressArray[ttl]=ipv4Matches[1];
+				// }
+				// ipv6Regex := regexp.MustCompile(`(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}`)
+				// ipv6Matches := ipv6Regex.FindAllString(string(pingOutput), -1)
+				// if len(ipv6Matches) > 0 {
+				// 	fmt.Println("IPv6 Address:", ipv6Matches[1], " ttl= ", ttl)
+				// 	ipAddressArray[ttl]=ipv6Matches[1];
+				// }
 				return
 			}
-			// pingOutput1, err := exec.Command("cmd", "/C", npingCommand).Output()
-			// if err != nil {
-			// 	fmt.Println("Error executing ping:", err, ttl)
-			// 	return
-			// }
-			pingOutput1:= runping(npingCommand)
-			pingOutput = pingOutput1
+			ch := make(chan string)
+			go runping(ch, npingCommand)
 		}
 	}
 }
