@@ -140,7 +140,6 @@ func writeMatchingPacketsToCSV(echoRequests, echoReply map[string]gopacket.Packe
 			}
 		}
 	}
-	fmt.Println("CSV file written successfully.")
 	return nil
 }
 
@@ -160,10 +159,7 @@ func main() {
 		return
 	}
 	ipAddresses := strings.Split(string(content), "\n")
-	fmt.Println("IP Addresses:")
-	for _, ip := range ipAddresses {
-		fmt.Println(ip)
-	}
+
 	// -------------------------------------------------------------------
 
 
@@ -189,15 +185,13 @@ func main() {
 
 					echoRequests[key] = packet
 				
-					// Print identifier and sequence number of this echo request
-					// fmt.Printf("Echo Request Sequence Number: %d\n",icmp.Seq)
 				}
 
 				// Check if the ICMP packet is a Time Exceeded (Type 11)
 				if icmp.TypeCode.Type() == layers.ICMPv4TypeTimeExceeded {
 					// Ensure the payload is at least 2 bytes long
 					if len(icmp.Payload) < 2 {
-						fmt.Println("Payload is too short")
+						fmt.Println("Error: Payload is too short")
 						return
 					}
 				
@@ -211,10 +205,7 @@ func main() {
 		}
 	}
 	times, _ = readTimesFromFile("times.txt")
-	fmt.Println("Times read from file:")
-	for i, t := range times {
-		fmt.Printf("Index %d: %s\n", i, t)
-	}
+
 	err1 := writeMatchingPacketsToCSV(echoRequests, echoReply, ipAddresses)
 	if err1 != nil {
 		fmt.Println("Error writing to CSV:", err1)

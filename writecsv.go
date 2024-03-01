@@ -74,7 +74,6 @@ func firstCSV(pcapFilePath, csvFilePath string) {
 		}
 	}
 
-	fmt.Println("CSV file created successfully.")
 }
 
 
@@ -158,7 +157,6 @@ func secondCSV(pcapFilePath, csvFilePath string) {
 		}
 	}
 
-	fmt.Println("CSV file created successfully.")
 }
 
 func main() {

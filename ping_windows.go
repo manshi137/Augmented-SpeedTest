@@ -44,10 +44,8 @@ func find_server(test_name string, filter_map map[string]string, wg *sync.WaitGr
 	//packet capture params
 	var snaplen int32 = 96
 	num_pkts := 0
-	iface, err := GetDefaultInterface()
-	fmt.Println(iface)
+	_, err := GetDefaultInterface()
 
-	fmt.Println("Interface is ", iface.Name)
 	if err != nil {
 	  fmt.Println("Failed to get default interface:", err)
 	  return ""
@@ -74,7 +72,6 @@ func find_server(test_name string, filter_map map[string]string, wg *sync.WaitGr
 		log.Fatal("Desired network interface not found")
 	}
 
-	fmt.Println("Desired device name= ", desiredDeviceName)
 	handle, err := pcap.OpenLive(desiredDeviceName, snaplen, false, pcap.BlockForever)
 	if err != nil {
 	  log.Fatal(err)
@@ -108,7 +105,6 @@ func find_server(test_name string, filter_map map[string]string, wg *sync.WaitGr
 		 destIP = ipPacket.DstIP.String()
 		 localIP = localIPv4
 	  }
-	  //fmt.Println(localIP, srcIP, destIP)
 	  if sourceIP == localIP {
 		serverIP = destIP
 	  } else {
@@ -143,7 +139,6 @@ func runping(ch chan<- string, npingCommand string, ttl int) {
 	ipv4Regex := regexp.MustCompile(`(?:[0-9]{1,3}\.){3}[0-9]{1,3}`)
 	ipv4Matches := ipv4Regex.FindAllString(string(pingOutput), -1)
 	if len(ipv4Matches) > 0 {
-		// fmt.Println("IPv4 Address:", ipv4Matches[1], " ttl= ", ttl)
 		locks[ttl].Lock()
 		ipAddressArray[ttl]=ipv4Matches[1];
 		locks[ttl].Unlock()
@@ -151,7 +146,6 @@ func runping(ch chan<- string, npingCommand string, ttl int) {
 	ipv6Regex := regexp.MustCompile(`(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}`)
 	ipv6Matches := ipv6Regex.FindAllString(string(pingOutput), -1)
 	if len(ipv6Matches) > 0 {
-		// fmt.Println("IPv6 Address:", ipv6Matches[1], " ttl= ", ttl)
 		locks[ttl].Lock()
 		ipAddressArray[ttl]=ipv6Matches[1];
 		locks[ttl].Unlock()
@@ -164,13 +158,8 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 	defer wg.Done()
 	numPacket := 1
 	
-	fmt.Printf("ping with TTL %d, numPackat= %d \n", ttl, int(numPacket))
-
 	startTime := time.Now()
 	npingCommand := fmt.Sprintf("ping -n %d -i %d  %s", numPacket, ttl, targetIP)
-	// ping = ipmatches[1]
-	// npingCommand := fmt.Sprintf("nping --icmp -c %d --ttl %d %s", int(numPacket), ttl, targetIP)
-	// nping = ipmatches[2]
 	interval := 100*time.Millisecond
 	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
@@ -179,25 +168,12 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 		select {
 		case <-ticker.C:
 			if getStopPingFlag() {
-				fmt.Println("Stopping continuous ping due to StopFlag...")
 				endTime := time.Now()
 				fmt.Println("--------------------------------------------------")
 				duration := endTime.Sub(startTime)
 				fmt.Printf("Execution Time of ping: %v , ttl= %d \n", duration, ttl)
 				fmt.Println("--------------------------------------------------")
 				
-				// ipv4Regex := regexp.MustCompile(`(?:[0-9]{1,3}\.){3}[0-9]{1,3}`)
-				// ipv4Matches := ipv4Regex.FindAllString(string(pingOutput), -1)
-				// if len(ipv4Matches) > 0 {
-				// 	fmt.Println("IPv4 Address:", ipv4Matches[1], " ttl= ", ttl)
-				// 	ipAddressArray[ttl]=ipv4Matches[1];
-				// }
-				// ipv6Regex := regexp.MustCompile(`(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}`)
-				// ipv6Matches := ipv6Regex.FindAllString(string(pingOutput), -1)
-				// if len(ipv6Matches) > 0 {
-				// 	fmt.Println("IPv6 Address:", ipv6Matches[1], " ttl= ", ttl)
-				// 	ipAddressArray[ttl]=ipv6Matches[1];
-				// }
 				return
 			}
 			ch := make(chan string)
@@ -210,6 +186,8 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 
 func runNDT7Speedtest(wg *sync.WaitGroup) {
 	defer wg.Done()
+	startTime := time.Now()
+	fmt.Println("speedtest start at: ",startTime)
 	fmt.Println("Running ndt7-speedtest...")
 	// Replace "ndt7-speedtest" with the actual path or command you want to run
 	cmd := exec.Command("ndt7-client")
@@ -223,6 +201,8 @@ func runNDT7Speedtest(wg *sync.WaitGroup) {
 	if err != nil {
 		fmt.Println("Error running ndt7-speedtest:", err)
 	}
+	endTime := time.Now()
+	fmt.Println("speedtest end at: ",endTime)
 	fmt.Println("Done running ndt7-speedtest.")
 }
 
@@ -230,10 +210,8 @@ func capturePacket(test_name string, filter_map map[string]string, time_sec int,
 	defer wg.Done()
 
 	// packet capture params
-	fmt.Println("Starting capturepackets...")
 	var snaplen int32 = 1600
-	iface, err := GetDefaultInterface()
-	fmt.Println("Interface is ", iface.Name)
+	_, err := GetDefaultInterface()
 	if err != nil {
 		fmt.Println("Failed to get default interface:", err)
 		return
@@ -241,7 +219,6 @@ func capturePacket(test_name string, filter_map map[string]string, time_sec int,
 
 	capture_filter := filter_map[test_name]
 
-	fmt.Println("Capture filter is ", capture_filter)
 	desiredFriendlyName := "Intel(R) Wi-Fi 6E AX211 160MHz"
 
 	// Find the corresponding device name for the given friendly name
@@ -289,10 +266,8 @@ func capturePacket(test_name string, filter_map map[string]string, time_sec int,
 	// Start capturing packets
 	packetSource := gopacket.NewPacketSource(handle, handle.LinkType()) //packetSource.Packets() is a channel
 
-	fmt.Println("Start capturing packets...")
 	for packet := range packetSource.Packets() {
 		if getStopPingFlag() {
-			fmt.Println("Stopping capturePacket due to StopFlag...")
 			return
 		}
 
@@ -302,7 +277,6 @@ func capturePacket(test_name string, filter_map map[string]string, time_sec int,
 			fmt.Println("Error writing packet to pcap file:", err)
 		}
 	}
-	fmt.Println("Done capturepackets w/o StopFlag.")
 }
 
 
@@ -342,16 +316,15 @@ func main() {
 	}
 
 	wg1.Wait()
-	fmt.Println("Done ndt7test....")
 	// wait for 10 more seconds and then stop the pingWithTTL threads
-	fmt.Println("Wait for 10 seconds...") 
 	time.Sleep(10 * time.Second)
 	setStopPingFlag(true)
 	//stop nping now
 	
 
 	wg2.Wait()
-	fmt.Println("Done pingWithTTL and capturePacket....")
+	endTime:= time.Now()
+	fmt.Println("Pings ending at: ", endTime)
 	localIPv4 := GetLocalIP("v4")
 	localIPv6 := GetLocalIP("v6")
 	fmt.Println("Local IPv4: ", localIPv4)
@@ -390,6 +363,5 @@ func main() {
 		}
 	}
 
-	fmt.Println("IP addresses appended to ip_addresses.txt successfully.")
 	
 }
