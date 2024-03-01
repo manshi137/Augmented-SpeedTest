@@ -21,6 +21,9 @@ def run_ttest():
     upload = [[] for i in range(hops+1)]
     idle = [[] for i in range(hops+1)]
 
+    congested_d = []
+    congested_u = []
+
     with open('ping_reply.csv', 'r') as file:
         reader = csv.DictReader(file)
         for row in reader:
@@ -58,6 +61,8 @@ def run_ttest():
         print("hop= ", hop, "download vs idle")
         print("t_statistic= ", t_statistic)
         print("p_value= ", p_value)
+        if(p_value<=alpha):
+            congested_d.append(hop)
         print("\n")
 
     print("------------------------------------------- \n")
@@ -67,11 +72,16 @@ def run_ttest():
         print("hop= ", hop, "upload vs idle")
         print("t_statistic= ", t_statistic)
         print("p_value= ", p_value)
+        if(p_value<=alpha):
+            congested_u.append(hop)
         print("\n")
 
-    upload_mean = []
-    download_mean = []
-    idle_mean = []
+    print("Congestion during download in hops:")
+    print(congested_d)
+    print("Congestion during upload in hops:")
+    print(congested_u)
+
+
 
 run_ttest()
 

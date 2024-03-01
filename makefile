@@ -1,8 +1,8 @@
 .PHONY: ping nping clean
 
-ping: ping_windows writecsv filter timecheck ping_reply_map
+ping: ping_windows writecsv filter timecheck ping_reply_map ttest
 
-nping: nping_windows writecsv filter timecheck ping_reply_map
+nping: nping_windows writecsv filter timecheck ping_reply_map ttest
 
 clean:
 	del /Q capture.pcap times.txt filtered_ndtcapture.csv ip_addresses.txt ndtcapture.csv ping_reply.csv ttest_output.txt
