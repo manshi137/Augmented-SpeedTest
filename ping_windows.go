@@ -129,18 +129,31 @@ func find_server(test_name string, filter_map map[string]string, wg *sync.WaitGr
 	return serverIPMax
 }
 
-func runping(ch chan<- string, npingCommand string) {
+func runping(ch chan<- string, npingCommand string, ttl int) {
     time.Sleep(1 * time.Millisecond)
 
     cmd := exec.Command("cmd", "/C", npingCommand)
-    output, err := cmd.CombinedOutput()
+    pingOutput, err := cmd.CombinedOutput()
 
     if err != nil {
-        fmt.Println("run ping error:", err)
+        fmt.Println("runping error:", err)
         ch <- fmt.Sprintf("Error: %v", err)
         return
     }
-    ch <- string(output)
+	ipv4Regex := regexp.MustCompile(`(?:[0-9]{1,3}\.){3}[0-9]{1,3}`)
+	ipv4Matches := ipv4Regex.FindAllString(string(pingOutput), -1)
+	if len(ipv4Matches) > 0 {
+		// fmt.Println("IPv4 Address:", ipv4Matches[1], " ttl= ", ttl)
+		ipAddressArray[ttl]=ipv4Matches[1];
+	}
+	ipv6Regex := regexp.MustCompile(`(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}`)
+	ipv6Matches := ipv6Regex.FindAllString(string(pingOutput), -1)
+	if len(ipv6Matches) > 0 {
+		// fmt.Println("IPv6 Address:", ipv6Matches[1], " ttl= ", ttl)
+		ipAddressArray[ttl]=ipv6Matches[1];
+	}
+
+    ch <- string(pingOutput)
 }
 
 func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
@@ -157,7 +170,7 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 	interval := 100*time.Millisecond
 	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
-	var pingOutput []byte
+	// var pingOutput []byte
 	for {
 		select {
 		case <-ticker.C:
@@ -184,7 +197,7 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 				return
 			}
 			ch := make(chan string)
-			go runping(ch, npingCommand)
+			go runping(ch, npingCommand, ttl)
 		}
 	}
 }
