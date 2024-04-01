@@ -36,6 +36,11 @@
   ping_reply_map.go --> ping_reply.csv 
   ttest.py --> ttest_result.txt
 
+# After Minor
+  Changing code to run on linux.
+  Flashing OpenWrt on routers.
+  
+
 
 ## References
   https://dl.acm.org/doi/pdf/10.1145/3230543.3230549
