@@ -39,6 +39,7 @@
 ## After Minor
   Changing code to run on linux.
   Flashing OpenWrt on routers.
+  SSH to the router and run tc to do network shaping.
   
   
 
