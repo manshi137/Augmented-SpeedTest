@@ -34,3 +34,39 @@ Congestion during download in hops:
 [1]
 Congestion during upload in hops:
 [1]
+hop=  1 download vs idle
+t_statistic=  6.458727851218027
+p_value=  0.000653070734621301
+
+
+hop=  2 download vs idle
+t_statistic=  -0.5814912336468598
+p_value=  0.5820805249681708
+
+
+hop=  3 download vs idle
+t_statistic=  0.3222223090080717
+p_value=  0.7582157030072125
+
+
+------------------------------------------- 
+
+hop=  1 upload vs idle
+t_statistic=  2.7699511718907734
+p_value=  0.03242456755490918
+
+
+hop=  2 upload vs idle
+t_statistic=  -0.24838048791234835
+p_value=  0.8121227854223214
+
+
+hop=  3 upload vs idle
+t_statistic=  -1.2803894332809387
+p_value=  0.2476766135627397
+
+
+Congestion during download in hops:
+[1]
+Congestion during upload in hops:
+[1]
