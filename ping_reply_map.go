@@ -143,6 +143,7 @@ func writeMatchingPacketsToCSV(echoRequests, echoReply map[string]gopacket.Packe
 	return nil
 }
 
+
 func main() {
 	// Open the pcap file
 	handle, err := pcap.OpenOffline("capture.pcap")
