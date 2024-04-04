@@ -49,3 +49,7 @@
   https://www.mdpi.com/1424-8220/23/2/923
   https://www.researchgate.net/publication/354194462_Measuring_and_Localising_Congestion_in_Mobile_Broadband_Networks
 
+
+## Command to run the code in linux
+  sudo env "PATH=$PATH" "GOPATH=$GOPATH" go run ping_linux.go util.go
+
