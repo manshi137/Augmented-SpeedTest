@@ -14,7 +14,7 @@ import (
 	"regexp"
 	// "io/ioutil"
 	"os"
-	
+	"strconv"
 )
 
 const (
@@ -144,31 +144,33 @@ func find_server(test_name string, filter_map map[string]string, wg *sync.WaitGr
 	return serverIPMax
 }
 
-func runping(ch chan<- string, npingCommand string, ttl int) {
+func runping(ch chan<- string, pingCommand string, ttl int, targetIP string) {
     time.Sleep(1 * time.Millisecond)
-
-    // cmd := exec.Command("cmd", "/C", npingCommand)
-	cmd := exec.Command("bash", "-c", npingCommand)
-
-    pingOutput, err := cmd.CombinedOutput()
-
-    if err != nil {
-        fmt.Println("runping error:", err)
-        ch <- fmt.Sprintf("Error: %v", err)
-        return
-    }
+	
+	cmd := exec.Command("/usr/bin/ping", "-c", "1", "-t", strconv.Itoa(ttl) ,targetIP)
+    pingOutput, _ := cmd.CombinedOutput()
+	fmt.Println("start")
+	fmt.Println(string(pingOutput))
+	fmt.Println("end")
+    // if err != nil {
+    //     fmt.Println("runping error:", err)
+    //     ch <- fmt.Sprintf("Error: %v", err)
+    //     return
+    // }
 	ipv4Regex := regexp.MustCompile(`(?:[0-9]{1,3}\.){3}[0-9]{1,3}`)
 	ipv4Matches := ipv4Regex.FindAllString(string(pingOutput), -1)
+	fmt.Println(ipv4Matches)
+	fmt.Println("end2")
 	if len(ipv4Matches) > 0 {
 		locks[ttl].Lock()
-		ipAddressArray[ttl]=ipv4Matches[1];
+		ipAddressArray[ttl]=ipv4Matches[2];
 		locks[ttl].Unlock()
 	}
 	ipv6Regex := regexp.MustCompile(`(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}`)
 	ipv6Matches := ipv6Regex.FindAllString(string(pingOutput), -1)
 	if len(ipv6Matches) > 0 {
 		locks[ttl].Lock()
-		ipAddressArray[ttl]=ipv6Matches[1];
+		ipAddressArray[ttl]=ipv6Matches[2];
 		locks[ttl].Unlock()
 	}
 
@@ -180,7 +182,7 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 	numPacket := 1
 	
 	startTime := time.Now()
-	npingCommand := fmt.Sprintf("ping -n %d -i %d  %s", numPacket, ttl, targetIP)
+	pingCommand := fmt.Sprintf("/usr/bin/ping -n %d -i %d  %s", numPacket, ttl, targetIP)
 	interval := 100*time.Millisecond
 	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
@@ -198,7 +200,7 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 				return
 			}
 			ch := make(chan string)
-			go runping(ch, npingCommand, ttl)
+			go runping(ch, pingCommand, ttl, targetIP)
 		}
 	}
 }
