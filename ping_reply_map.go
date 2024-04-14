@@ -80,7 +80,7 @@ func getRequestSequenceNumber(packet gopacket.Packet) string {
 	icmpLayer := packet.Layer(layers.LayerTypeICMPv4)
 	if icmpLayer != nil {
 		icmpPacket, _ := icmpLayer.(*layers.ICMPv4)
-		return fmt.Sprintf("%d", icmpPacket.Seq)
+		return fmt.Sprintf("%d", icmpPacket.Id)
 	}
 	return ""
 }
@@ -193,7 +193,7 @@ func main() {
 				if icmp.TypeCode.Type() == layers.ICMPv4TypeEchoRequest {
 					// Store Echo Request packet by identifier and sequence number
 					key := fmt.Sprintf("%d", icmp.Seq)
-					fmt.Println(key)
+					fmt.Println("req", key)
 					echoRequests[key] = packet
 					// count +=1
 				
@@ -208,11 +208,11 @@ func main() {
 					}
 				
 					// Extract the last 2 bytes from the payload to match with sequence number
-					lastTwoBytes := icmp.Payload[len(icmp.Payload)-2:]
-					sequenceNumber := binary.BigEndian.Uint16(lastTwoBytes)
+					lastTwoBytes := icmp.Payload[len(icmp.Payload)-4 : len(icmp.Payload)-2]
+					sequenceNumber := binary.LittleEndian.Uint16(lastTwoBytes)
 					key := fmt.Sprintf("%d", sequenceNumber)
     				echoReply[key] = packet
-					fmt.Println(key)
+					fmt.Println("reply ", key)
 					count+= 1
 				}
 			}

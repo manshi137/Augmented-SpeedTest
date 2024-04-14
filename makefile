@@ -5,7 +5,7 @@ ping: ping_linux writecsv filter timecheck ping_reply_map ttest
 nping: nping_linux writecsv filter timecheck ping_reply_map ttest
 
 clean:
-	del /Q capture.pcap times.txt filtered_ndtcapture.csv ip_addresses.txt ndtcapture.csv ping_reply.csv ttest_output.txt
+	rm -f capture.pcap times.txt filtered_ndtcapture.csv ip_addresses.txt ndtcapture.csv ping_reply.csv ttest_output.txt
 
 ping_linux:
 	sudo env "PATH=$(PATH)" "GOPATH=$(GOPATH)" go run ping_linux.go util.go
