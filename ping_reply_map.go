@@ -186,15 +186,22 @@ func main() {
 		// Check if the packet is an IPv4 packet containing ICMP
 		if ipv4Layer := packet.Layer(layers.LayerTypeIPv4); ipv4Layer != nil {
 			icmpLayer := packet.Layer(layers.LayerTypeICMPv4)
+			// payloadLength := len(icmpLayer.LayerPayload())
+			// fmt.Println("length =====", payloadLength)
 			if icmpLayer != nil {
 				icmp, _ := icmpLayer.(*layers.ICMPv4)
 				
 				// Check if the ICMP packet is an Echo Request (Type 8)
 				if icmp.TypeCode.Type() == layers.ICMPv4TypeEchoRequest {
 					// Store Echo Request packet by identifier and sequence number
-					key := fmt.Sprintf("%d", icmp.Seq)
-					fmt.Println("req", key)
-					echoRequests[key] = packet
+					keyreq := fmt.Sprintf("%d", icmp.Id)
+					// fmt.Println("length req= ", len((icmp.Payload)))
+					// lastsixtyBytes := icmp.Payload[len(icmp.Payload)-4 : len(icmp.Payload)-2]
+					// sequenceNumberreq := binary.LittleEndian.Uint16(lastsixtyBytes)
+					// keyreq := fmt.Sprintf("%d", sequenceNumberreq)
+					
+					fmt.Println("req", keyreq)
+					echoRequests[keyreq] = packet
 					// count +=1
 				
 				}
