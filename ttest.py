@@ -37,8 +37,13 @@ def run_ttest():
                 upload[int(row['TTL'])].append(time_diff)
             elif(row['Download/Upload/Idle'] == 'idle'):
                 idle[int(row['TTL'])].append(time_diff)
+    print("length-------------------")
+    print(len(download[1]))
+    print(len(upload[1]))
+    print(len(idle[1]))
 
 
+    # -----------------checkkk length ----------------
     n = min(len(download), len(upload))
     n = min(n, len(idle))
 
@@ -50,10 +55,20 @@ def run_ttest():
         # print(f"download[{h}]: {len(download[h])}, upload[{h}]: {len(upload[h])}, idle[{h}]: {len(idle[h])}")
 
     # convert the cumulative time to time difference
+    print("cumulative download")
+    print(download[1])
+    print(download[2])
+    print(download[3])
+
     for hop in range(hops, 1, -1):
         download[hop] = [download[hop][i] - download[hop-1][i] for i in range(n)]
         upload[hop] = [upload[hop][i] - upload[hop-1][i] for i in range(n)]
         idle[hop] = [idle[hop][i] - idle[hop-1][i] for i in range(n)]
+
+    print("non cumulative download")
+    print(download[1])
+    print(download[2])
+    print(download[3])
 
     # download vs idle
     for hop in range(1, hops+1):

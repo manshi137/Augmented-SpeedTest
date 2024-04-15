@@ -200,8 +200,10 @@ func main() {
 					// sequenceNumberreq := binary.LittleEndian.Uint16(lastsixtyBytes)
 					// keyreq := fmt.Sprintf("%d", sequenceNumberreq)
 					
-					fmt.Println("req", keyreq)
+					// fmt.Println("req", keyreq)
 					echoRequests[keyreq] = packet
+					fmt.Println("key", keyreq)
+
 					// count +=1
 				
 				}
@@ -216,10 +218,10 @@ func main() {
 				
 					// Extract the last 2 bytes from the payload to match with sequence number
 					lastTwoBytes := icmp.Payload[len(icmp.Payload)-4 : len(icmp.Payload)-2]
-					sequenceNumber := binary.LittleEndian.Uint16(lastTwoBytes)
+					sequenceNumber := binary.BigEndian.Uint16(lastTwoBytes)
 					key := fmt.Sprintf("%d", sequenceNumber)
     				echoReply[key] = packet
-					fmt.Println("reply ", key)
+					// fmt.Println("reply ", key)
 					count+= 1
 				}
 			}
@@ -229,6 +231,7 @@ func main() {
 	times, _ = readTimesFromFile("times.txt")
 	fmt.Println("Size of the req:", len(echoRequests))
 	fmt.Println("Size of the reply:", len(echoReply))
+
 	err1 := writeMatchingPacketsToCSV(echoRequests, echoReply, ipAddresses)
 	if err1 != nil {
 		fmt.Println("Error writing to CSV:", err1)

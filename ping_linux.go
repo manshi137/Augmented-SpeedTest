@@ -148,6 +148,7 @@ func runping(ch chan<- string, pingCommand string, ttl int, targetIP string) {
     time.Sleep(1 * time.Millisecond)
 	
 	cmd := exec.Command("/usr/bin/ping", "-c", "1", "-t", strconv.Itoa(ttl) ,targetIP)
+	fmt.Println("/usr/bin/ping", "-c", "1", "-t", strconv.Itoa(ttl) ,targetIP)
     pingOutput, _ := cmd.CombinedOutput()
 	fmt.Println("start")
 	fmt.Println(string(pingOutput))

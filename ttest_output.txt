@@ -1,0 +1,36 @@
+hop=  1 download vs idle
+t_statistic=  1.9185047728094453
+p_value=  0.1034804402695713
+
+
+hop=  2 download vs idle
+t_statistic=  -0.8065734224127268
+p_value=  0.45069109633484405
+
+
+hop=  3 download vs idle
+t_statistic=  1.5264292607141345
+p_value=  0.1777547173887515
+
+
+------------------------------------------- 
+
+hop=  1 upload vs idle
+t_statistic=  1.680898732045389
+p_value=  0.1437800512553282
+
+
+hop=  2 upload vs idle
+t_statistic=  0.8204961757704538
+p_value=  0.4433018468819898
+
+
+hop=  3 upload vs idle
+t_statistic=  0.9588565049510094
+p_value=  0.37465850391422323
+
+
+Congestion during download in hops:
+[]
+Congestion during upload in hops:
+[]
