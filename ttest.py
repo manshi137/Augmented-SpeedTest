@@ -22,8 +22,8 @@ def run_ttest():
     upload = [[] for i in range(hops+1)]
     idle = [[] for i in range(hops+1)]
 
-    congested_d = []
-    congested_u = []
+    congested_d = None
+    congested_u = None
 
     
 
@@ -61,16 +61,11 @@ def run_ttest():
                 upload[int(row['TTL'])].append(time_diff)
             elif(row['Download/Upload/Idle'] == 'idle'):
                 idle[int(row['TTL'])].append(time_diff)
-    print("length-------------------")
-    print(len(download[1]))
-    print(len(upload[1]))
-    print(len(idle[1]))
-
 
     # -----------------checkkk length ----------------
-    n = min(len(download), len(upload))
-    n = min(n, len(idle))
-
+    n = min(len(download[1]),len(download[2]),len(download[3]), len(upload[1]), len(upload[2]), len(upload[3]))
+    n = min(n, len(idle[1]), len(idle[2]), len(idle[3]))
+    print("n ==", n)
     # truncate the list to the same length
     for h in range(1, hops+1):
         download[h] = download[h][:n]
@@ -93,32 +88,69 @@ def run_ttest():
     print(download[1])
     print(download[2])
     print(download[3])
-
+    print("\n---------------------------------------------------------------")
+    p_values_map_d = {}
+    t_statistics_map_d = {}
+    p_values_map_u = {}
+    t_statistics_map_u = {}
     # download vs idle
     for hop in range(1, hops+1):
         t_statistic, p_value = stats.ttest_ind(download[hop], idle[hop])
+        t_statistic, p_value = stats.ttest_ind(download[hop], idle[hop])
+        p_values_map_d[hop] = p_value
+        t_statistics_map_d[hop] = t_statistic
         print("hop= ", hop, "download vs idle")
         print("t_statistic= ", t_statistic)
         print("p_value= ", p_value)
-        if(p_value<=alpha):
-            congested_d.append(hop)
-        print("\n")
 
     print("------------------------------------------- \n")
     # upload vs idle
     for hop in range(1, hops+1):
         t_statistic, p_value = stats.ttest_ind(upload[hop], idle[hop])
+        p_values_map_u[hop] = p_value
+        t_statistics_map_u[hop] = t_statistic
         print("hop= ", hop, "upload vs idle")
         print("t_statistic= ", t_statistic)
         print("p_value= ", p_value)
-        if(p_value<=alpha):
-            congested_u.append(hop)
-        print("\n")
+        
+    print("\n---------------------------------------------------------------")
 
-    print("Congestion during download in hops:")
-    print(congested_d)
-    print("Congestion during upload in hops:")
-    print(congested_u)
+    max_tstat_d = float('-inf')
+    max_tstat_hop_d = None
+    congested_d = []
+
+    for hop in range(1, hops+1):
+        if hop in p_values_map_d and p_values_map_d[hop] < alpha:
+            if hop in t_statistics_map_d and t_statistics_map_d[hop] > max_tstat_d:
+                congested_d = [hop]
+                max_tstat_d = t_statistics_map_d[hop]
+                max_tstat_hop_d = hop
+            elif hop in t_statistics_map_d and t_statistics_map_d[hop] == max_tstat_d:
+                congested_d.append(hop)
+
+        max_tstat_u = float('-inf')
+        max_tstat_hop_u = None
+        congested_u = []
+
+    for hop in range(1, hops+1):
+        if hop in p_values_map_u and p_values_map_u[hop] < alpha:
+            if hop in t_statistics_map_u and t_statistics_map_u[hop] > max_tstat_u:
+                congested_u = [hop]
+                max_tstat_u = t_statistics_map_u[hop]
+                max_tstat_hop_u = hop
+            elif hop in t_statistics_map_u and t_statistics_map_u[hop] == max_tstat_u:
+                congested_u.append(hop)
+
+    print("Congested hops for download:", congested_d)
+    print("Hop with highest t_statistic value for download:", max_tstat_hop_d)
+    print("Corresponding t_statistic value for download:", max_tstat_d)
+
+    print("Congested hops for upload:", congested_u)
+    print("Hop with highest t_statistic value for upload:", max_tstat_hop_u)
+    print("Corresponding t_statistic value for upload:", max_tstat_u)
+
+
+
 
 
 
