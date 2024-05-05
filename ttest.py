@@ -4,6 +4,7 @@ import numpy as np
 import scipy.stats as stats
 from datetime import datetime
 import os
+import pandas as pd
 
 hops = 3
 alpha = 0.05
@@ -23,6 +24,28 @@ def run_ttest():
 
     congested_d = []
     congested_u = []
+
+    
+
+
+
+    
+
+    # Read the CSV file into a DataFrame
+    df = pd.read_csv('ping_reply.csv')
+
+    # Convert the RequestTime column to datetime format
+    df['RequestTime'] = pd.to_datetime(df['RequestTime'], format='%H:%M:%S.%f')
+
+    # Sort the DataFrame by the RequestTime column
+    df_sorted = df.sort_values(by='RequestTime')
+
+    # Convert the RequestTime column back to the desired format
+    df_sorted['RequestTime'] = df_sorted['RequestTime'].dt.strftime('%H:%M:%S.%f')
+
+    # Write the sorted DataFrame to a new CSV file
+    df_sorted.to_csv('sorted_ping_reply.csv', index=False)
+
 
     with open('ping_reply.csv', 'r') as file:
         reader = csv.DictReader(file)
