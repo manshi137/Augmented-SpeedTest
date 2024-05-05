@@ -44,8 +44,9 @@ def run_ttest():
     df_sorted['RequestTime'] = df_sorted['RequestTime'].dt.strftime('%H:%M:%S.%f')
 
     # Write the sorted DataFrame to a new CSV file
-    df_sorted.to_csv('sorted_ping_reply.csv', index=False)
+    # df_sorted.to_csv('sorted_ping_reply.csv', index=False)
 
+    df_sorted.to_csv('sorted_ping_reply.csv', index=False)
 
     with open('ping_reply.csv', 'r') as file:
         reader = csv.DictReader(file)
