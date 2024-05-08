@@ -48,7 +48,7 @@ def run_ttest():
 
     df_sorted.to_csv('sorted_ping_reply.csv', index=False)
 
-    with open('ping_reply.csv', 'r') as file:
+    with open('sorted_ping_reply.csv', 'r') as file:
         reader = csv.DictReader(file)
         for row in reader:
             request_time = row['RequestTime']
@@ -61,8 +61,13 @@ def run_ttest():
                 upload[int(row['TTL'])].append(time_diff)
             elif(row['Download/Upload/Idle'] == 'idle'):
                 idle[int(row['TTL'])].append(time_diff)
+            else:
+                print("onooo")
 
     # -----------------checkkk length ----------------
+    print(download[1])
+    print(download[2])
+    print(download[3])
     n = min(len(download[1]),len(download[2]),len(download[3]), len(upload[1]), len(upload[2]), len(upload[3]))
     n = min(n, len(idle[1]), len(idle[2]), len(idle[3]))
     print("n ==", n)
@@ -149,7 +154,8 @@ def run_ttest():
     print("Hop with highest t_statistic value for upload:", max_tstat_hop_u)
     print("Corresponding t_statistic value for upload:", max_tstat_u)
 
-
+    print("\n")
+    print("-------------------------------------------------------------test complete-----------------------------------------------------------")
 
 
 

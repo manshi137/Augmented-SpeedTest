@@ -184,7 +184,7 @@ func pingWithTTL(ttl int, targetIP string, wg *sync.WaitGroup) {
 	
 	startTime := time.Now()
 	pingCommand := fmt.Sprintf("/usr/bin/ping -n %d -i %d  %s", numPacket, ttl, targetIP)
-	interval := 100*time.Millisecond
+	interval := 1000*time.Millisecond
 	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
 	// var pingOutput []byte
