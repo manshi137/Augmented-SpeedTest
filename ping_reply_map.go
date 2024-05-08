@@ -133,17 +133,18 @@ func writeMatchingPacketsToCSV(echoRequests, echoReply map[string]gopacket.Packe
 			
 			if requestTimeParsed.Before(upload_start) {
 				dui = "download"
-				fmt.Println("download")
+				// fmt.Println("download")
 			} else if (requestTimeParsed.After(upload_start) && requestTimeParsed.Before(idle_start)) ||  requestTimeParsed.Equal(upload_start) || requestTimeParsed.Equal(idle_start)  {
 				dui = "upload"
-				fmt.Println("upload")
+				// fmt.Println("upload")
 			} else {
 				dui = "idle"
-				fmt.Println("idle")
+				// fmt.Println("idle")
 			}
 			// Write fields to CSV file
 			record := []string{sequenceNumber, requestTime, replyTime, requestSourceIP, requestDestIP, replySourceIP, replyDestIP, replyTTLExpiredIP, ttl, dui}
 			err := writer.Write(record)
+			fmt.Println(record)
 			if err != nil {
 				return fmt.Errorf("error writing CSV record: %w", err)
 			}
@@ -202,14 +203,12 @@ func main() {
 					
 					// fmt.Println("req", keyreq)
 					echoRequests[keyreq] = packet
-					fmt.Println("key", keyreq)
+					fmt.Println("req ", keyreq)
 
 					// count +=1
 				
-				}
-
-				// Check if the ICMP packet is a Time Exceeded (Type 11)
-				if icmp.TypeCode.Type() == layers.ICMPv4TypeTimeExceeded {
+				} else if icmp.TypeCode.Type() == layers.ICMPv4TypeTimeExceeded {
+					// Check if the ICMP packet is a Time Exceeded (Type 11)
 					// Ensure the payload is at least 2 bytes long
 					if len(icmp.Payload) < 2 {
 						fmt.Println("Error: Payload is too short")
@@ -217,12 +216,18 @@ func main() {
 					}
 				
 					// Extract the last 2 bytes from the payload to match with sequence number
-					lastTwoBytes := icmp.Payload[len(icmp.Payload)-4 : len(icmp.Payload)-2]
+					// lastTwoBytes := icmp.Payload[len(icmp.Payload)-4 : len(icmp.Payload)-2]  //24, 25 byte in payload = identifier 
+					fmt.Println("reply len", len(icmp.Payload))
+
+					lastTwoBytes := icmp.Payload[24:26] 
 					sequenceNumber := binary.BigEndian.Uint16(lastTwoBytes)
 					key := fmt.Sprintf("%d", sequenceNumber)
     				echoReply[key] = packet
-					// fmt.Println("reply ", key)
+					fmt.Println("reply ", key)
 					count+= 1
+				} else{
+					fmt.Println("cant identify packet")
+
 				}
 			}
 		}
