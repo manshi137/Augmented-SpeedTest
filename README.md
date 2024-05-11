@@ -1,11 +1,15 @@
 ## How to run
 
-  ```make ping```
+  ```
+  make ping
+  ```
 
 This will run the augmented tool and append the ttest output in the ttest_output.txt file.
 If you want to clear the ttest_output.txt file, run the following command
 
-  ```make clean```
+  ```
+  make clean
+  ```
 
 And then run the make ping command again.
 ## Setup
@@ -38,7 +42,7 @@ To shape the download traffic, we add a virtual interface (ifb0) to capture and 
   tc class add dev ifb0 parent 1: classid 1:1 htb rate 100mbit
   ```
 
-## Setup (with virtual interface)
+### Setup (with virtual interface)
 ```
 +---------------------+                    +------------------------+                +---------+
 |         LAN         |                    | Raspberry Pi Router    |                |  Client |
@@ -48,7 +52,8 @@ To shape the download traffic, we add a virtual interface (ifb0) to capture and 
 |                     |                    |        (br-lan)        |                |         |
 |                     |                    +------------------------+                |         |
 |                     |                                                              |         |
-+---------------------+                                                              +---------+```
++---------------------+                                                              +---------+
+```
 
 
 ## References
