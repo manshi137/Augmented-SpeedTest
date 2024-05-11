@@ -91,17 +91,12 @@ func main() {
 		return
 	}
 	ipAddresses := strings.Split(string(content), "\n")
-	fmt.Println("IP Addresses:")
-	for _, ip := range ipAddresses {
-		fmt.Println(ip)
-	}
+
 	serverIP := ipAddresses[6]
 	localIPv4 := ipAddresses[4]
 
 	err1 := filterCSV(inputCSV, outputCSV, serverIP, localIPv4)
 	if err1 != nil {
 		log.Fatal(err1)
-	} else {
-		fmt.Println("Filtered CSV file created successfully.")
-	}
+	} 
 }

@@ -26,7 +26,6 @@ func writeArrayToFile(filename string) error {
 		}
 	}
 
-	fmt.Println("Upload / Download time written to times.txt successfully!")
 	return nil
 }
 
@@ -54,19 +53,14 @@ func main() {
 		return
 	}
 	ipAddresses := strings.Split(string(content), "\n")
-	// fmt.Println("IP Addresses:")
+	
 	timeArray = [2]string{"", ""}
 	serverIP := ipAddresses[6]
 	localIPv4 := ipAddresses[4]
 	serverIP = strings.TrimSpace(serverIP)
 	localIPv4 = strings.TrimSpace(localIPv4)
-	// fmt.Println("record[6]= ", ipAddresses[6])
-	fmt.Println("serverIP=", serverIP, "h")
-	fmt.Println("localipv4=", localIPv4, "h")
-	// Iterate over each line in the CSV file
-
 	var prevTime time.Time
-	fmt.Println("prev time 1= ", prevTime)
+
 
 
 	for {
@@ -79,33 +73,19 @@ func main() {
 		// Extract source and destination IPs from the record
 		ip1 := record[1] //
 		ip2 := record[2]
-		// fmt.Println("ip1= ", ip1, "ip2 = ", ip2)
 		
 		// Increment counters based on packet direction
 		pktSize, _ := strconv.Atoi(record[3])
 
-		
-
-		// fmt.Println("pktsize = ", record[3], pktSize)
-
 		if ip1 == serverIP && ip2 == localIPv4 {
 			download+= pktSize
-			// fmt.Println("download = ", download)
 		} else if ip1 == localIPv4 && ip2 == serverIP {
 			upload+= pktSize
-			// fmt.Println("upload = ", upload)
 		}
 		// Increment packet count
 		packetCount++
 
-		if packetCount==3{
-			fmt.Println("len of ip1= ", len(ip1))
-			fmt.Println("len of serverip= ", len(serverIP))
-			ip1 = strings.TrimSpace(ip1)
 
-			fmt.Println("ip1=", ip1, "h")
-			fmt.Println("ip2=", ip2, "h")
-		}
 
 		timestamp := record[0]
 
@@ -117,43 +97,28 @@ func main() {
 				continue
 			}
 			if prevTime.IsZero(){
-
 				prevTime = currentTime
-				fmt.Println("prevTime  2= ", prevTime)
 			}
 
 			diff := currentTime.Sub(prevTime)
-			// fmt.Println("prevTime =", prevTime, " current time= ", currentTime, " diff = ", diff)
 
  
 			// Check every 100 packets
 			if diff.Milliseconds() >= 100 {
-				// fmt.Println("hello")
-				// Check if IP1 to IP2 packets are in majority
-				// fmt.Println("upload = ", upload, " download = ", download)
-				// fmt.Println("upload = ", upload, "  download= ", download)
 				if download < upload {
 					if(timeArray[0] == "" ){
 						timeArray[0] = record[0]
 					}
 					timeArray[1] = record[0]
-					fmt.Println("upload packets are in majority at this timestamp = ", record[0], " upload packets = ", upload, " download packets = ", download )
-					// Record timestamp or perform other actions
 				}
 				// Reset counters
 				download = 0
 				upload = 0
 				prevTime= currentTime
-				fmt.Println("packetcount= ", packetCount)
 				packetCount=0
 			}
 		}
 		
-
-		// Update prevTime to the timestamp from the first record if it's zero value
-		
-
-		// Calculate time difference between current and previous timestamps
 		
 	}
 	

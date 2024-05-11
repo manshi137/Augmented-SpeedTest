@@ -80,7 +80,7 @@ func getRequestSequenceNumber(packet gopacket.Packet) string {
 	icmpLayer := packet.Layer(layers.LayerTypeICMPv4)
 	if icmpLayer != nil {
 		icmpPacket, _ := icmpLayer.(*layers.ICMPv4)
-		return fmt.Sprintf("%d", icmpPacket.Seq)
+		return fmt.Sprintf("%d", icmpPacket.Id)
 	}
 	return ""
 }
@@ -93,6 +93,10 @@ func writeMatchingPacketsToCSV(echoRequests, echoReply map[string]gopacket.Packe
 	defer file.Close()
 	upload_start:= times[0]
 	idle_start:= times[1]
+	fmt.Println("Size of the req:", len(echoRequests))
+	fmt.Println("Size of the reply:", len(echoReply))
+	fmt.Println("uploadstart=", upload_start)
+	fmt.Println("idle start= ", idle_start)
 	// Create a CSV writer
 	writer := csv.NewWriter(file)
 	defer writer.Flush()
@@ -103,11 +107,13 @@ func writeMatchingPacketsToCSV(echoRequests, echoReply map[string]gopacket.Packe
 	if err != nil {
 		return fmt.Errorf("error writing CSV header: %w", err)
 	}
-
+	count := 0
 	// Iterate over echoRequests and echoReply maps
 	for key, request := range echoRequests {
 		reply, ok := echoReply[key]
+		count +=1
 		if ok {
+			count+=1
 			// Extract required fields from request and reply packets
 			sequenceNumber := getRequestSequenceNumber(request)
 			requestTime := request.Metadata().Timestamp.Format("15:04:05.999999999")
@@ -127,22 +133,27 @@ func writeMatchingPacketsToCSV(echoRequests, echoReply map[string]gopacket.Packe
 			
 			if requestTimeParsed.Before(upload_start) {
 				dui = "download"
+				// fmt.Println("download")
 			} else if (requestTimeParsed.After(upload_start) && requestTimeParsed.Before(idle_start)) ||  requestTimeParsed.Equal(upload_start) || requestTimeParsed.Equal(idle_start)  {
 				dui = "upload"
+				// fmt.Println("upload")
 			} else {
 				dui = "idle"
+				// fmt.Println("idle")
 			}
 			// Write fields to CSV file
 			record := []string{sequenceNumber, requestTime, replyTime, requestSourceIP, requestDestIP, replySourceIP, replyDestIP, replyTTLExpiredIP, ttl, dui}
 			err := writer.Write(record)
+			fmt.Println(record)
 			if err != nil {
 				return fmt.Errorf("error writing CSV record: %w", err)
 			}
 		}
 	}
-	fmt.Println("CSV file written successfully.")
+	fmt.Println(count)
 	return nil
 }
+
 
 func main() {
 	// Open the pcap file
@@ -160,10 +171,7 @@ func main() {
 		return
 	}
 	ipAddresses := strings.Split(string(content), "\n")
-	fmt.Println("IP Addresses:")
-	for _, ip := range ipAddresses {
-		fmt.Println(ip)
-	}
+
 	// -------------------------------------------------------------------
 
 
@@ -173,48 +181,62 @@ func main() {
 	// Map to store ICMP Echo Request packets by their identifier and sequence number
 	echoRequests := make(map[string]gopacket.Packet)
 	echoReply := make(map[string]gopacket.Packet)
-
+	count:= 0
 	// Loop through each packet in the pcap file
 	for packet := range packetSource.Packets() {
 		// Check if the packet is an IPv4 packet containing ICMP
 		if ipv4Layer := packet.Layer(layers.LayerTypeIPv4); ipv4Layer != nil {
 			icmpLayer := packet.Layer(layers.LayerTypeICMPv4)
+			// payloadLength := len(icmpLayer.LayerPayload())
+			// fmt.Println("length =====", payloadLength)
 			if icmpLayer != nil {
 				icmp, _ := icmpLayer.(*layers.ICMPv4)
-
+				
 				// Check if the ICMP packet is an Echo Request (Type 8)
 				if icmp.TypeCode.Type() == layers.ICMPv4TypeEchoRequest {
 					// Store Echo Request packet by identifier and sequence number
-					key := fmt.Sprintf("%d", icmp.Seq)
+					keyreq := fmt.Sprintf("%d", icmp.Id)
+					// fmt.Println("length req= ", len((icmp.Payload)))
+					// lastsixtyBytes := icmp.Payload[len(icmp.Payload)-4 : len(icmp.Payload)-2]
+					// sequenceNumberreq := binary.LittleEndian.Uint16(lastsixtyBytes)
+					// keyreq := fmt.Sprintf("%d", sequenceNumberreq)
+					
+					// fmt.Println("req", keyreq)
+					echoRequests[keyreq] = packet
+					fmt.Println("req ", keyreq)
 
-					echoRequests[key] = packet
+					// count +=1
 				
-					// Print identifier and sequence number of this echo request
-					// fmt.Printf("Echo Request Sequence Number: %d\n",icmp.Seq)
-				}
-
-				// Check if the ICMP packet is a Time Exceeded (Type 11)
-				if icmp.TypeCode.Type() == layers.ICMPv4TypeTimeExceeded {
+				} else if icmp.TypeCode.Type() == layers.ICMPv4TypeTimeExceeded {
+					// Check if the ICMP packet is a Time Exceeded (Type 11)
 					// Ensure the payload is at least 2 bytes long
 					if len(icmp.Payload) < 2 {
-						fmt.Println("Payload is too short")
+						fmt.Println("Error: Payload is too short")
 						return
 					}
 				
 					// Extract the last 2 bytes from the payload to match with sequence number
-					lastTwoBytes := icmp.Payload[len(icmp.Payload)-2:]
+					// lastTwoBytes := icmp.Payload[len(icmp.Payload)-4 : len(icmp.Payload)-2]  //24, 25 byte in payload = identifier 
+					fmt.Println("reply len", len(icmp.Payload))
+
+					lastTwoBytes := icmp.Payload[24:26] 
 					sequenceNumber := binary.BigEndian.Uint16(lastTwoBytes)
 					key := fmt.Sprintf("%d", sequenceNumber)
     				echoReply[key] = packet
+					fmt.Println("reply ", key)
+					count+= 1
+				} else{
+					fmt.Println("cant identify packet")
+
 				}
 			}
 		}
 	}
+	fmt.Print(count)
 	times, _ = readTimesFromFile("times.txt")
-	fmt.Println("Times read from file:")
-	for i, t := range times {
-		fmt.Printf("Index %d: %s\n", i, t)
-	}
+	fmt.Println("Size of the req:", len(echoRequests))
+	fmt.Println("Size of the reply:", len(echoReply))
+
 	err1 := writeMatchingPacketsToCSV(echoRequests, echoReply, ipAddresses)
 	if err1 != nil {
 		fmt.Println("Error writing to CSV:", err1)

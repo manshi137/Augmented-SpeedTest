@@ -29,7 +29,7 @@ func GetLocalIP(ver string) string {
   }
   conn, err := net.Dial("udp", ip)
   if err != nil {
-      fmt.Println("error finding IP", ver)
+    //   fmt.Println("Error finding local IP-", ver)
       return "::1"
   }
   defer conn.Close()

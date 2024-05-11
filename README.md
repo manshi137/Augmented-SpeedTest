@@ -1,40 +1,45 @@
-# COD891
-# Lab hours :
-  ## Wednesday (2 hours) + Monday/Thursday(1 hour)
-
-# Timeline
-### Week 1 - 15 to 21 Jan
-### Week 2 - 22 to 28 Jan
-### Week 3 - 29 Jan to 4 Feb
-### Week 4 - 5 to 11 Feb
-### Week 5 - 12 to 18 Feb
-### Week 6 - 19 to 25 Feb (Minor Exam)
-### Week 7 - 26 to 29 Feb
-
-# Plan
-  ## Step 1 - Week 1 and 2
-    Run Speed Test and send ICMP packets to find upload, download and idle RTTs.
-  ## Step 2 - Week 3
-    Categorize RTTs as upload/ download/ idle (using Wireshark/tcpdump).
-  ## Step 3 - Week 4 
-    Compare upload and download RTTs with idle RTTs to detect congestion (using T Test).
-  ## Step 4 - Week 5
-    Check if congestion is at last mile.
-  ## Step 5 - Week 7
-    Buffer time + Mid Term Presentation
-
-## For running NDT7 client:
-  #### Run these commands inside ndt7-client-go repo
-    cd ./cmd/ndt7-client
-    go run main.go
-  
 ## How to run
-  ping_windows.go util.go --> capture.pcap, save_ip.txt (targetIP, localIP, hop1, hop2, ...)
-  writecsv.go --> ndtcapture.csv
-  filter.go --> filtered_ndtcapture.csv
-  timecheck.go --> times.txt
-  ping_reply_map.go --> ping_reply.csv 
-  ttest.py --> ttest_result.txt
+  make ping
+This will run the augmented tool and append the ttest output in the ttest_output.txt file.
+If you want to clear the ttest_output.txt file, run the following command
+  make clean
+And then run the make ping command again.
+## Setup
++---------------------+              +------------------------+                +---------+
+|         LAN         |              | Raspberry Pi Router    |                |  Client |
+|---------------------|              |------------------------|                |---------|
+|                     |----(eth0)----|                        |----(br-lan)----|         |
+|                     |              |------------------------|                |         |
+|                     |              |        (br-lan)        |                |         |
+|                     |              +------------------------+                |         |
+|                     |                                                        |         |
++---------------------+                                                        +---------+
+
+
+## How to change the upload rate 
+  tc qdisc add dev eth0 root netem rate 30mbit
+
+## How to change the download rate
+To shape the download traffic, we add a virtual interface (ifb0) to capture and redirect incoming traffic from the physical network interface . Effectively, we capture incoming traffic on the virtual interface, shape it according to requirement and redirect it into the physical interface.
+
+  modprobe ifb numifbs=1
+  ip link add name ifb0 type ifb
+  ip link set dev ifb0 up
+  tc qdisc add dev eth0 handle ffff: ingress
+  tc filter add dev eth0 parent ffff: protocol ip u32 match u32 0 0 action mirred egress redirect dev ifb0
+  tc qdisc replace dev ifb0 root handle 1: htb default 1
+  tc class add dev ifb0 parent 1: classid 1:1 htb rate 100mbit
+
+
++---------------------+                    +------------------------+                +---------+
+|         LAN         |                    | Raspberry Pi Router    |                |  Client |
+|---------------------|                    |------------------------|                |---------|
+|                     |---(ifb0)-(eth0)----|                        |----(br-lan)----|         |
+|                     |                    |------------------------|                |         |
+|                     |                    |        (br-lan)        |                |         |
+|                     |                    +------------------------+                |         |
+|                     |                                                              |         |
++---------------------+                                                              +---------+
 
 
 ## References
