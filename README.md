@@ -35,10 +35,12 @@ To shape the download traffic, we add a virtual interface (ifb0) to capture and 
   tc qdisc add dev eth0 handle ffff: ingress
   tc filter add dev eth0 parent ffff: protocol ip u32 match u32 0 0 action mirred egress redirect dev ifb0
   tc qdisc replace dev ifb0 root handle 1: htb default 1
-  tc class add dev ifb0 parent 1: classid 1:1 htb rate 100mbit```
+  tc class add dev ifb0 parent 1: classid 1:1 htb rate 100mbit
+  ```
 
-
-```+---------------------+                    +------------------------+                +---------+
+## Setup (with virtual interface)
+```
++---------------------+                    +------------------------+                +---------+
 |         LAN         |                    | Raspberry Pi Router    |                |  Client |
 |---------------------|                    |------------------------|                |---------|
 |                     |---(ifb0)-(eth0)----|                        |----(br-lan)----|         |
