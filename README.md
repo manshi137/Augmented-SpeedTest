@@ -22,7 +22,8 @@ And then run the make ping command again.
 
 ```
 ## How to change the upload rate 
-  ```tc qdisc add dev eth0 root netem rate 30mbit```
+  ```tc qdisc add dev eth0 root netem rate 30mbit
+  ```
 
 ## How to change the download rate
 To shape the download traffic, we add a virtual interface (ifb0) to capture and redirect incoming traffic from the physical network interface . Effectively, we capture incoming traffic on the virtual interface, shape it according to requirement and redirect it into the physical interface.
