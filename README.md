@@ -5,6 +5,7 @@
   ```
 
 This will run the augmented tool and append the ttest output in the ttest_output.txt file.
+
 If you want to clear the ttest_output.txt file, run the following command
 
   ```
